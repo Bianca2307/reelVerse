@@ -1,17 +1,18 @@
 import UpcomingMovieList from "./UpcomingMovieList";
-import { useFetchMovies } from "../../hooks/useFetchMovies";
+import { useFetchMovies } from "../../api/useFetchMovies";
+import { API_KEY, TMDB_API_BASE_URL} from "../../utils/constants";
+import { useTranslation } from "react-i18next";
 
 
 export default function UpcomingMovieCardComponent() {
-    const url = "https://api.themoviedb.org/3/movie/upcoming?api_key=d773193a88ede0c03b5da21759b8dea6&language=en-US";
+    const url = `${TMDB_API_BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US`;
     const upcoming = useFetchMovies(url);
+    const { t } = useTranslation();
 
   
-
-
     return (
         <div className="myContainer">
-            <h2 className="title">Upcoming Movies</h2>
+            <h2 className="title">{t("Upcoming Movies")}</h2>
             <UpcomingMovieList upcomingMovies={upcoming } />
     
         </div>

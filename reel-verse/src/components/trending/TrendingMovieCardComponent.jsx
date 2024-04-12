@@ -1,18 +1,17 @@
 import TrendingMovieList from "./TrendingMovieList";
-import { useFetchMovies } from "../../hooks/useFetchMovies";
-
-
+import { useFetchMovies } from "../../api/useFetchMovies";
+import { API_KEY, TMDB_API_BASE_URL} from "../../utils/constants";
+import { useTranslation } from "react-i18next";
 
 export default function TrendingMovieCardComponent() {
 
-    const url = "https://api.themoviedb.org/3/movie/top_rated?api_key=d773193a88ede0c03b5da21759b8dea6&append_to_response=videos"
+    const url = `${TMDB_API_BASE_URL}/movie/top_rated?api_key=${API_KEY}&append_to_response=videos`
     const topRatedMovies = useFetchMovies(url)
-    
-  
+    const { t } = useTranslation();
     
     return (
         <div className="myContainer">
-            <h2 className="title">Trending Movies</h2>
+            <h2 className="title">{t("Trending Movie")}</h2>
             {/* <div className="scroller"> */}
                 <TrendingMovieList topRated={topRatedMovies } />
             {/* </div> */}
