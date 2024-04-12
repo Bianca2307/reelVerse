@@ -12,7 +12,6 @@ export default function UpcomingMovieList(props) {
             {upcoming.map((movie) => (
                 <Link to={`/movies/${movie.id}`} key={movie.id}>
                     <MovieCard
-                        
                         title={movie.title}
                         image={movie.poster_path}
                         date={movie.release_date}
