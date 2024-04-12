@@ -1,10 +1,17 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import translations from './translations.json'
 
+const resources = {
+    en: {
+        translation: translations,
+    },
+};
 
 i18n
     .use(initReactI18next) // bind react-i18next to the instance
     .init({
+        resources,
         fallbackLng: 'en',
         debug: true,
 

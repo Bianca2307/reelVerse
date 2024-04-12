@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import PopularMovieCardComponent from "../../components/popular/PopularMovieCardComponent";
 import TrendingMovieCardComponent from "../../components/trending/TrendingMovieCardComponent";
 import UpcomingMovieCardComponent from "../../components/upcoming/UpcomingMovieCardComponent";
@@ -10,7 +10,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -31,7 +30,6 @@ export default function Movies() {
 
     async function fetchGenres(id) {
         const res = await fetch(
-            `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
             `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
         );
         const data = await res.json();
@@ -59,18 +57,15 @@ export default function Movies() {
     async function fetchSearch() {
         const res = await fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
         );
         const data = await res.json();
         setSearchMovies(data.results);
     }
 
-  
-
     function handleSubmit(e) {
         e.preventDefault();
         fetchSearch();
-        formData.query = ""
+        formData.query = "";
         navigate(".");
     }
 
@@ -83,12 +78,8 @@ export default function Movies() {
                         <div className="column_wrapper">
                             <div className="content_wrapper wrap">
                                 <div className="title">
-                                    <h2>{t("Bun venit.")}</h2>
-                                    <h3>
-                                        {t(
-                                            "Milioane de filme, seriale și oameni de descoperit.Explorați acum."
-                                        )}
-                                    </h3>
+                                    <h2>{t("welcome")}</h2>
+                                    <h3>{t("explore")}</h3>
                                 </div>
                                 <div className="search">
                                     <form className="search-movies">
@@ -100,7 +91,7 @@ export default function Movies() {
                                             onChange={handleChange}
                                         />
                                         <button onClick={handleSubmit}>
-                                            {t("Search")}
+                                            {t('search_btn')}
                                         </button>
                                     </form>
                                 </div>
@@ -116,7 +107,7 @@ export default function Movies() {
                             setActiveCategory("");
                         }}
                     >
-                       {t("Action")}
+                        {t('action_btn')}
                     </button>
                     <button
                         onClick={() => {
@@ -124,7 +115,7 @@ export default function Movies() {
                             setActiveCategory("");
                         }}
                     >
-                        {t("Adventure")}
+                        {t('adventure_btn')}
                     </button>
 
                     {expandButtonClicked && !restrictButtonClicked && (
@@ -135,7 +126,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Animation")}
+                                {t('animation_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -143,7 +134,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Comedy")}
+                                {t('comedy_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -151,7 +142,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Crime")}
+                                {t('crime_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -159,7 +150,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Documentary")}
+                                {t('documentary_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -167,7 +158,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Drama")}
+                                {t('drama_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -175,7 +166,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Family")}
+                                {t('family_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -183,7 +174,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Fantasy")}
+                                {t('fantasy_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -191,7 +182,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("History")}
+                                {t('history_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -199,7 +190,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Horror")}
+                                {t('horror_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -207,7 +198,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Music")}
+                                {t('music_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -215,7 +206,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Mistery")}
+                                {t('mistery_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -223,7 +214,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Romance")}
+                                {t('romance_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -231,7 +222,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Science Fiction")}{" "}
+                                {t('science_btn')}{" "}
                             </button>
                             <button
                                 onClick={() => {
@@ -239,7 +230,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("TV Movie")}
+                                {t('tv_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -247,7 +238,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("Thriller")}
+                                {t('thriller_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -255,7 +246,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("War")}
+                                {t('war_btn')}
                             </button>
                             <button
                                 className="more"

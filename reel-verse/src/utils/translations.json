@@ -1,0 +1,29 @@
+
+{
+    "welcome":"Bun venit.",
+    "explore":"Milioane de filme, seriale și oameni de descoperit.Explorați acum.",
+    "nowPlayingTitle":"Now Playing",
+    "popularTitle":"Popular Movies",
+    "trendingTitle":"Trending Movie",
+    "upcomingTitle":"Upcoming Movies",
+    "search_btn":"Search",
+    "action_btn":"Action",
+    "adventure_btn":"Adventure",
+    "animation_btn":"Animation",
+    "comedy_btn":"Comedy",
+    "crime_btn":"Crime",
+    "documentary_btn":"Documentary",
+    "drama_btn":"Drama",
+    "family_btn":"Family",
+    "fantasy_btn":"Fantasy",
+    "history_btn":"History",
+    "horror_btn":"Horror",
+    "music_btn":"Music",
+    "mistery_btn":"Mistery",
+    "romance_btn":"Romance",
+    "science_btn":"Science Fiction",
+    "tv_btn":"TV Movie",
+    "thriller_btn":"Thriller",
+    "war_btn":"War"
+
+}
