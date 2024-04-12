@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 export default function NowPlayingCardComponent() {
     const url = `${TMDB_API_BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US`
+    const url = `${TMDB_API_BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US`
     const playing = useFetchMovies(url);
     const { t } = useTranslation();
 
