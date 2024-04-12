@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function UpcomingMovieCardComponent() {
     const url = `${TMDB_API_BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US`;
+    const url = `${TMDB_API_BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US`;
     const upcoming = useFetchMovies(url);
     const { t } = useTranslation();
 

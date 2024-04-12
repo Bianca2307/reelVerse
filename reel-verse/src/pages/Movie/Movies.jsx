@@ -32,6 +32,7 @@ export default function Movies() {
     async function fetchGenres(id) {
         const res = await fetch(
             `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
+            `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
         );
         const data = await res.json();
         setGenres(data.results);
@@ -57,6 +58,7 @@ export default function Movies() {
 
     async function fetchSearch() {
         const res = await fetch(
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
         );
         const data = await res.json();
