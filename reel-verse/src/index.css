@@ -3,19 +3,61 @@
     --white: #ffffff;
 
     --spacing-small: 10px;
-    --spacing-medium:20px;
-    --spacing--large:25px;
-    --spacing-xlarge:40px;
+    --spacing-medium: 20px;
+    --spacing--large: 25px;
+    --spacing-xlarge: 40px;
 
-    --height-large:100%;
+    --height-large: 100%;
 
-    --width-large:100%;
+    --width-large: 100%;
 
-    --border-small:15px;
-    --border-medium:25px;
-    --border-large:30px;
+    --border-small: 15px;
+    --border-medium: 25px;
+    --border-large: 30px;
 }
 
+/**NAVBAR **/
+.navbar {
+    padding: 5px;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    color: var(--white);
+    font-size: 20px;
+}
+
+
+
+.navbar a:hover {
+    color: rgb(13, 181, 218);
+    border-bottom: 1px solid rgb(13, 181, 218);
+    padding-bottom: 2px;
+}
+
+a.active-link {
+    font-weight: bold;
+    color: rgb(13, 181, 218);
+    border-bottom: 1px solid rgb(13, 181, 218);
+    padding-bottom: 2px;
+}
+
+.nav {
+    margin-right:5px;
+}
+
+.nav-logo {
+    display: grid;
+    padding: 5px 20px;
+}
+
+.nav-logo h3 {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    color: var(--white);
+}
 
 
 /***HOME PAGE ***/
@@ -61,11 +103,11 @@ body {
 }
 
 .form-label {
-color: var(--white);
+    color: var(--white);
 }
 
 .text-muted {
-color: var(--white) !important;
+    color: var(--white) !important;
 }
 
 label {
@@ -79,7 +121,7 @@ label {
     justify-content: space-between;
     padding: 15px 0;
     position: fixed;
-    top: 20px;
+    top: 120px;
     width: 55px;
 }
 
@@ -93,6 +135,14 @@ label {
     color: #546487;
     cursor: pointer;
     font-size: 26px;
+}
+.user-account {
+    margin-top:180px;
+}
+
+.user-account  img{
+    width:35px;
+    height: 35px;
 }
 
 /* .panel svg.active {
@@ -165,7 +215,7 @@ div.media.discover div.content_wrapper {
 
 div.column_wrapper div.content_wrapper {
     max-width: 1400px;
-    padding: 30px  var(--spacing-xlarge);
+    padding: 30px var(--spacing-xlarge);
     width: var(--width-large);
     display: flex;
     align-items: flex-start;
@@ -226,7 +276,7 @@ div.consensus.tight {
     width: 38px;
     box-sizing: border-box;
     margin-top: -48px;
-   margin-left: -15px
+    margin-left: -15px
 }
 
 div.consensus.tight div.outer_ring {
@@ -453,4 +503,3 @@ section.new_index form button {
 section.new_index form button:hover {
     color: var(--black);
 }
-
