@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
+
+
 export default function MovieDetail() {
     const params = useParams();
     console.log(params);
