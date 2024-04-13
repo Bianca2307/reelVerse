@@ -24,21 +24,17 @@ export default function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        try {
-            const userCredential = await signInWithEmailAndPassword(
-                auth,
-                formData.email,
-                formData.password
-            );
-            console.log(userCredential);
-            const user = userCredential.user;
-            localStorage.setItem("token", user.accessToken);
-            localStorage.setItem("user", JSON.stringify(user));
 
-            navigate("/movies");
-        } catch (error) {
-            console.log(error);
-        }
+        const userCredential = await signInWithEmailAndPassword(
+            auth,
+            formData.email,
+            formData.password
+        );
+        console.log(userCredential);
+        const user = userCredential.user;
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/movies");
     }
 
     return (
@@ -54,7 +50,6 @@ export default function Login() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                       
                     />
                     <Form.Control.Feedback type="invalid">
                         Please enter a valid email address.
