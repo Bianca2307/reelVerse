@@ -15,7 +15,6 @@ export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
     const [expandButtonClicked, setExpandButtonClicked] = useState(false);
     const [restrictButtonClicked, setRestrictButtonClicked] = useState(false);
-
     const [genres, setGenres] = useState([]);
     const [showGenres, setShowGenres] = useState(false);
     const [formData, setFormData] = useSearchParams();

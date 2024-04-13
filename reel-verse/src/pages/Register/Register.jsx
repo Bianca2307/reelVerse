@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -20,18 +20,20 @@ export default function Register() {
         }));
     }
 
-   
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                formData.email,
+                formData.password
+            );
             console.log(userCredential);
             const user = userCredential.user;
-            localStorage.setItem('token', user.accessToken);
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem("token", user.accessToken);
+            localStorage.setItem("user", JSON.stringify(user));
 
             navigate("/");
-
         } catch (error) {
             console.log(error);
         }

@@ -54,7 +54,6 @@ export default function Login() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                       
                     />
                     <Form.Control.Feedback type="invalid">
                         Please enter a valid email address.
