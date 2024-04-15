@@ -6,11 +6,13 @@ import Button from "react-bootstrap/Button";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 
+
 export default function Login() {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
 
@@ -25,21 +27,17 @@ export default function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        try {
-            const userCredential = await signInWithEmailAndPassword(
-                auth,
-                formData.email,
-                formData.password
-            );
-            console.log(userCredential);
-            const user = userCredential.user;
-            localStorage.setItem("token", user.accessToken);
-            localStorage.setItem("user", JSON.stringify(user));
 
-            navigate("/movies");
-        } catch (error) {
-            console.log(error);
-        }
+        const userCredential = await signInWithEmailAndPassword(
+            auth,
+            formData.email,
+            formData.password
+        );
+        console.log(userCredential);
+        const user = userCredential.user;
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/movies");
     }
 
     return (
@@ -74,11 +72,11 @@ export default function Login() {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="sign-button">
-                    Sign in
+                    {t('signIn')}
                 </Button>
                 <Form.Text className="text-muted" id="sign-up-text">
-                    Don't you have an account?
-                    <Link to="/register">Sign up</Link>
+                    {t('dontHaveAccount')}
+                    <Link to="/register">{t('signUp') }</Link>
                 </Form.Text>
             </Form>
         </>
