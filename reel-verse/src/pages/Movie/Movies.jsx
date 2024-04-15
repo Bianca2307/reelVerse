@@ -13,10 +13,6 @@ import { auth } from "../../firebase/firebase";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 
-import { auth } from "../../firebase/firebase";
-import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
-import { useTranslation } from "react-i18next";
-
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -29,7 +25,7 @@ export default function Movies() {
     const [searchMovies, setSearchMovies] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const { t } = useTranslation();
+  
 
     const styles = {
         visibility: expandButtonClicked ? "hidden" : "visible",
@@ -37,7 +33,6 @@ export default function Movies() {
 
     async function fetchGenres(id) {
         const res = await fetch(
-            `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
             `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
         );
         const data = await res.json();
@@ -64,7 +59,6 @@ export default function Movies() {
 
     async function fetchSearch() {
         const res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
         );
         const data = await res.json();
