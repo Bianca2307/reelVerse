@@ -6,7 +6,6 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register"
 import Protected from "./components/common/Protected";
 import Layout from "./components/common/Layout";
-import Layout from "./components/common/Layout";
 
 function App() {
     return (

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useState } from "react";
 import PopularMovieCardComponent from "../../components/popular/PopularMovieCardComponent";
 import TrendingMovieCardComponent from "../../components/trending/TrendingMovieCardComponent";
 import UpcomingMovieCardComponent from "../../components/upcoming/UpcomingMovieCardComponent";
@@ -8,14 +7,8 @@ import GenresList from "../../components/genres/GenresList";
 import SearchMoviesList from "../../components/search/SearchMoviesList";
 import user from "../../assets/user.png";
 
-import user from "../../assets/user.png";
-
 import { signOut } from "firebase/auth";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { auth } from "../../firebase/firebase";
-import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
-import { useTranslation } from "react-i18next";
-
 import { auth } from "../../firebase/firebase";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
@@ -40,7 +33,6 @@ export default function Movies() {
 
     async function fetchGenres(id) {
         const res = await fetch(
-            `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
             `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
         );
         const data = await res.json();
@@ -67,9 +59,7 @@ export default function Movies() {
 
     async function fetchSearch() {
         const res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
-        );
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`)
         const data = await res.json();
         setSearchMovies(data.results);
     }
@@ -400,9 +390,6 @@ export default function Movies() {
                     >
                         <path d="M18 11c0-.959-.68-1.761-1.581-1.954C16.779 8.445 17 7.75 17 7c0-2.206-1.794-4-4-4-1.517 0-2.821.857-3.5 2.104C8.821 3.857 7.517 3 6 3 3.794 3 2 4.794 2 7c0 .902.312 1.727.817 2.396A1.994 1.994 0 0 0 2 11v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-2.638l4 2v-7l-4 2V11zm-5-6c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2zM6 5c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2zM4 19v-8h12l.002 8H4z"></path>
                     </svg>
-                    <div className="user-account">
-                        <img onClick={ () => handleLogout()} src={user} />
-                    </div>
                     <div className="user-account">
                         <img onClick={ () => handleLogout()} src={user} />
                     </div>
