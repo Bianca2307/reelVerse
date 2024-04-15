@@ -22,21 +22,20 @@ export default function Register() {
         }));
     }
 
-   
     async function handleSubmit(e) {
         e.preventDefault();
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-            console.log(userCredential);
-            const user = userCredential.user;
-            localStorage.setItem('token', user.accessToken);
-            localStorage.setItem('user', JSON.stringify(user));
 
-            navigate("/");
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            formData.email,
+            formData.password
+        );
+        console.log(userCredential);
+        const user = userCredential.user;
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("user", JSON.stringify(user));
 
-        } catch (error) {
-            console.log(error);
-        }
+        navigate("/");
     }
 
     return (

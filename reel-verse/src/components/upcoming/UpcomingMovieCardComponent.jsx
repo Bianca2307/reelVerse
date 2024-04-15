@@ -16,6 +16,5 @@ export default function UpcomingMovieCardComponent() {
             <UpcomingMovieList upcomingMovies={upcoming } />
     
         </div>
-        
-    )
+    );
 }

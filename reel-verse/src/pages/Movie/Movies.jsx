@@ -63,12 +63,10 @@ export default function Movies() {
         setSearchMovies(data.results);
     }
 
-  
-
     function handleSubmit(e) {
         e.preventDefault();
         fetchSearch();
-        formData.query = ""
+        formData.query = "";
         navigate(".");
     }
 
