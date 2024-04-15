@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 
 import MovieCard from "../common/MovieCard";
-import { Link } from "react-router-dom";
+
 
 export default function UpcomingMovieList(props) {
     const upcoming = props.upcomingMovies;

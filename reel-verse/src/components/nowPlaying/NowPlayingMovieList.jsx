@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import MovieCard from "../common/MovieCard"
 import { Link } from "react-router-dom";
+
+import MovieCard from "../common/MovieCard"
+
 
 
 export default function NowPlayingMovieList(props) {

@@ -1,11 +1,15 @@
 
 {
+    "now_playing":"Now Playing",
+    "popular":"Popular Movies",
+    "trending":"Trending Movie",
+    "upcoming":"Upcoming Movies",
+    "signIn":"Sign in",
+    "dontHaveAccount":"Don't you have an account?",
+    "signUp":"Sign up",
+    "register":"Let's Register",
     "welcome":"Bun venit.",
     "explore":"Milioane de filme, seriale și oameni de descoperit.Explorați acum.",
-    "nowPlayingTitle":"Now Playing",
-    "popularTitle":"Popular Movies",
-    "trendingTitle":"Trending Movie",
-    "upcomingTitle":"Upcoming Movies",
     "search_btn":"Search",
     "action_btn":"Action",
     "adventure_btn":"Adventure",
@@ -25,5 +29,7 @@
     "tv_btn":"TV Movie",
     "thriller_btn":"Thriller",
     "war_btn":"War"
+
+
 
 }

@@ -4,6 +4,10 @@ import Movies from "./pages/Movie/Movies";
 import MovieDetail from "./pages/Movie/MovieDetail";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Movies from "./pages/Movie/Movies";
+import MovieDetail from "./pages/Movie/MovieDetail";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import Protected from "./components/common/Protected";
 import Layout from "./components/common/Layout";
 

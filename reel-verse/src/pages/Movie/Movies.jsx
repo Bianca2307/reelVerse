@@ -13,18 +13,22 @@ import { auth } from "../../firebase/firebase";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 
+import { auth } from "../../firebase/firebase";
+import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
+import { useTranslation } from "react-i18next";
+
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
     const [expandButtonClicked, setExpandButtonClicked] = useState(false);
     const [restrictButtonClicked, setRestrictButtonClicked] = useState(false);
-
     const [genres, setGenres] = useState([]);
     const [showGenres, setShowGenres] = useState(false);
     const [formData, setFormData] = useSearchParams();
     const query = formData.get("query");
     const [searchMovies, setSearchMovies] = useState([]);
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const { t } = useTranslation();
 
     const styles = {
@@ -33,6 +37,7 @@ export default function Movies() {
 
     async function fetchGenres(id) {
         const res = await fetch(
+            `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
             `${TMDB_API_BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${id}`
         );
         const data = await res.json();
@@ -60,6 +65,7 @@ export default function Movies() {
     async function fetchSearch() {
         const res = await fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
         );
         const data = await res.json();
         setSearchMovies(data.results);
@@ -68,6 +74,7 @@ export default function Movies() {
     function handleSubmit(e) {
         e.preventDefault();
         fetchSearch();
+        formData.query = "";
         formData.query = "";
         navigate(".");
     }
@@ -81,8 +88,12 @@ export default function Movies() {
                         <div className="column_wrapper">
                             <div className="content_wrapper wrap">
                                 <div className="title">
-                                    <h2>{t("welcome")}</h2>
-                                    <h3>{t("explore")}</h3>
+                                    <h2>{t('welcome')}</h2>
+                                    <h3>
+                                        {t(
+                                            'explore'
+                                        )}
+                                    </h3>
                                 </div>
                                 <div className="search">
                                     <form className="search-movies">
@@ -94,7 +105,7 @@ export default function Movies() {
                                             onChange={handleChange}
                                         />
                                         <button onClick={handleSubmit}>
-                                            {t("search_btn")}
+                                            {t('search_btn')}
                                         </button>
                                     </form>
                                 </div>
@@ -110,7 +121,7 @@ export default function Movies() {
                             setActiveCategory("");
                         }}
                     >
-                        {t("action_btn")}
+                       {t('action_btn')}
                     </button>
                     <button
                         onClick={() => {
@@ -118,7 +129,7 @@ export default function Movies() {
                             setActiveCategory("");
                         }}
                     >
-                        {t("adventure_btn")}
+                        {t('adventure_btn')}
                     </button>
 
                     {expandButtonClicked && !restrictButtonClicked && (
@@ -129,7 +140,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("animation_btn")}
+                                {t('animation_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -137,7 +148,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("comedy_btn")}
+                                {t('comedy_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -145,7 +156,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("crime_btn")}
+                                {t('crime_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -153,7 +164,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("documentary_btn")}
+                                {t('documentary_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -161,7 +172,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("drama_btn")}
+                                {t('drama_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -169,7 +180,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("family_btn")}
+                                {t('family_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -177,7 +188,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("fantasy_btn")}
+                                {t('fantasy_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -185,7 +196,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("history_btn")}
+                                {t('history_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -193,7 +204,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("horror_btn")}
+                                {t('horror_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -201,7 +212,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("music_btn")}
+                                {t('music_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -209,7 +220,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("mistery_btn")}
+                                {t('mistery_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -217,7 +228,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("romance_btn")}
+                                {t('romance_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -225,7 +236,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("science_btn")}{" "}
+                                {t('science_btn')}{" "}
                             </button>
                             <button
                                 onClick={() => {
@@ -233,7 +244,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("tv_btn")}
+                                {t('tv_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -241,7 +252,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("thriller_btn")}
+                                {t('thriller_btn')}
                             </button>
                             <button
                                 onClick={() => {
@@ -249,7 +260,7 @@ export default function Movies() {
                                     setActiveCategory("");
                                 }}
                             >
-                                {t("war_btn")}
+                                {t('war_btn')}
                             </button>
                             <button
                                 className="more"
