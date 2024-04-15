@@ -11,10 +11,9 @@ export default function TrendingMovieCardComponent() {
     
     return (
         <div className="myContainer">
-            <h2 className="title">{t('trending')}</h2>
-            {/* <div className="scroller"> */}
-                <TrendingMovieList topRated={topRatedMovies } />
-            {/* </div> */}
+            <h2 className="title">{t("trendingTitle")}</h2>
+            <TrendingMovieList topRated={topRatedMovies} />
         </div>
     );
 }
+
