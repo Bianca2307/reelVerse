@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import MovieCard from "../components/common/MovieCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 

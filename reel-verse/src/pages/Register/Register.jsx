@@ -1,9 +1,10 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { auth } from "../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function Register() {
     });
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     function handleChange(event) {
         setFormData((prevFormData) => ({
@@ -39,7 +41,7 @@ export default function Register() {
 
     return (
         <>
-            <h2 className="register-title">Let's Register</h2>
+            <h2 className="register-title">{ t('register')}</h2>
             <Form className="form-home" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -66,7 +68,7 @@ export default function Register() {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="sign-button">
-                    Sign up
+                    {t('signUp')}
                 </Button>
             </Form>
         </>
