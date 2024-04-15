@@ -10,7 +10,7 @@ export default function NowPlayingCardComponent() {
 
     return (
         <div className="myContainer">
-            <h2 className="title">{t('nowPlayingTitle')}</h2>
+            <h2 className="title">{t('now_playing')}</h2>
             <NowPlayingMovieList nowPlayingMovies={playing} />
         </div>
     )

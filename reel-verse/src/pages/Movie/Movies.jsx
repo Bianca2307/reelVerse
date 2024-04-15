@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState } from "react";
 import PopularMovieCardComponent from "../../components/popular/PopularMovieCardComponent";
 import TrendingMovieCardComponent from "../../components/trending/TrendingMovieCardComponent";
 import UpcomingMovieCardComponent from "../../components/upcoming/UpcomingMovieCardComponent";
@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
+
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -78,8 +79,12 @@ export default function Movies() {
                         <div className="column_wrapper">
                             <div className="content_wrapper wrap">
                                 <div className="title">
-                                    <h2>{t("welcome")}</h2>
-                                    <h3>{t("explore")}</h3>
+                                    <h2>{t('welcome')}</h2>
+                                    <h3>
+                                        {t(
+                                            'explore'
+                                        )}
+                                    </h3>
                                 </div>
                                 <div className="search">
                                     <form className="search-movies">
@@ -107,7 +112,7 @@ export default function Movies() {
                             setActiveCategory("");
                         }}
                     >
-                        {t('action_btn')}
+                       {t('action_btn')}
                     </button>
                     <button
                         onClick={() => {
