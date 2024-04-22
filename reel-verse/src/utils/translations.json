@@ -1,37 +1,50 @@
-
 {
-    "now_playing":"Now Playing",
-    "popular":"Popular Movies",
-    "trending":"Trending Movie",
-    "upcoming":"Upcoming Movies",
-    "signIn":"Sign in",
-    "dontHaveAccount":"Don't you have an account?",
-    "signUp":"Sign up",
-    "register":"Let's Register",
-    "welcome":"Bun venit.",
-    "explore":"Milioane de filme, seriale și oameni de descoperit.Explorați acum.",
-    "search_btn":"Search",
-    "action_btn":"Action",
-    "adventure_btn":"Adventure",
-    "animation_btn":"Animation",
-    "comedy_btn":"Comedy",
-    "crime_btn":"Crime",
-    "documentary_btn":"Documentary",
-    "drama_btn":"Drama",
-    "family_btn":"Family",
-    "fantasy_btn":"Fantasy",
-    "history_btn":"History",
-    "horror_btn":"Horror",
-    "music_btn":"Music",
-    "mistery_btn":"Mistery",
-    "romance_btn":"Romance",
-    "science_btn":"Science Fiction",
-    "tv_btn":"TV Movie",
-    "thriller_btn":"Thriller",
-    "war_btn":"War",
-    "movies":"Movies",
-    "logOut":"Log out"
+    "nowPlaying": { "PLAYING": "Now Playing" },
+    "popular": {"POPULAR": "Popular Movies"},
+    "trending":{"TRENDING": "Trending Movie"},
+    "upcoming":{ "UPCOMING": "Upcoming Movies"},
+    "searched":{"SEARCHED":"Searched Movies"},
+    "movies": {
+        "WELCOME": "Bun venit.",
+        "EXPLORE": "Milioane de filme, seriale și oameni de descoperit.Explorați acum.",
+        "SEARCH": "Search",
+        "ACTION": "Action",
+        "ADVENTURE": "Adventure",
+        "ANIMATION": "Animation",
+        "COMEDY": "Comedy",
+        "CRIME": "Crime",
+        "DOCUMENTARY": "Documentary",
+        "DRAMA": "Drama",
+        "FAMILY": "Family",
+        "FANTASY": "Fantasy",
+        "HISTORY": "History",
+        "HORROR": "Horror",
+        "MUSIC": "Music",
+        "MISTERY": "Mistery",
+        "ROMANCE": "Romance",
+        "SCIENCE": "Science Fiction",
+        "TV": "TV Movie",
+        "THRILLER": "Thriller",
+        "WAR": "War"
+    },
 
+    "header": {
+        "MOVIES": "Movies",
+        "LOG_OUT": "Log out",
+        "TITLE":"reelVerse"
+    },
 
+    "register": {
+        "REGISTER": "Let's Register",
+        "SIGN_UP": "Sign up"
+    },
 
+    "login": {
+        "WELCOME_BACK": "Welcome back",
+        "EMAIL": "Email address",
+        "VALID_EMAIL": "Please enter a valid email address.",
+        "PASSWORD": "Password",
+        "SIGN_IN": "Sign in",
+        "DONT_HAVE_ACCOUNT": "Don't you have an account?"
+    }
 }

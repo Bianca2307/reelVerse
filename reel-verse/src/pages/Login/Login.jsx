@@ -2,12 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
-
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { useTranslation } from "react-i18next";
 
+import styles from "./Login.module.css";
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -44,11 +43,14 @@ export default function Login() {
 
     return (
         <>
-            <h2 className="register-title">Welcome back</h2>
-            <Form className="form" onSubmit={handleSubmit}>
+            <h2 className={styles["login-title"]}>{t("login.WELCOME_BACK")}</h2>
+            <Form className={styles["login-form"]} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label className={styles["login-form__label"]}>
+                        {t("login.EMAIL")}
+                    </Form.Label>
                     <Form.Control
+                        className={styles["login-form__input"]}
                         type="email"
                         placeholder="Enter email"
                         name="email"
@@ -57,13 +59,16 @@ export default function Login() {
                         required
                     />
                     <Form.Control.Feedback type="invalid">
-                        Please enter a valid email address.
+                        {t("login.VALID_EMAIL")}
                     </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className={styles["login-form__label"]}>
+                        {t("login.PASSWORD")}
+                    </Form.Label>
                     <Form.Control
+                        className={styles["login-form__input"]}
                         type="password"
                         placeholder="Password"
                         name="password"
@@ -72,14 +77,22 @@ export default function Login() {
                         required
                     />
                 </Form.Group>
-
-                <Button variant="primary" type="submit" className="sign-button">
-                    {t('signIn')}
-                </Button>
-                <Form.Text className="text-muted" id="sign-up-text">
-                    {t('dontHaveAccount')}
-                    <Link to="/register">{t('signUp') }</Link>
-                </Form.Text>
+                <div className={styles["signIn-signUp"]}>
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        className={styles["sign-button"]}
+                    >
+                        {t("login.SIGN_IN")}
+                    </Button>
+                    <Form.Text
+                        className={styles["text-muted"]}
+                        id={styles["sign-up-text"]}
+                    >
+                        {t("login.DONT_HAVE_ACCOUNT")}
+                        <Link to="/register">{t("signUp")}</Link>
+                    </Form.Text>
+                </div>
             </Form>
         </>
     );

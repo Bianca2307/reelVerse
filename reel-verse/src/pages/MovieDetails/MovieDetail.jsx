@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
+import styles from "./MovieDetails.module.css"
+
 export default function MovieDetail() {
     const params = useParams();
     console.log(params);
@@ -33,9 +35,10 @@ export default function MovieDetail() {
     }, []);
 
     return (
-        <div className="details-container">
+        <div className={styles["details-container"]}>
             {videoKey && (
                 <iframe
+                    className={styles["details-container__trailer"]}
                     title="movie-video"
                     width="70%"
                     height="500"
@@ -44,15 +47,17 @@ export default function MovieDetail() {
                     allowFullScreen
                 ></iframe>
             )}
-            <div className="details-container__overview">{movieDetail.overview}</div>
-            <h2 className="related-title">Related</h2>
-            <Container className="recommended-container">
+            <div className={styles["details-container__overview"]}>
+                {movieDetail.overview}
+            </div>
+            <h2 className={styles["related-title"]}>Related</h2>
+            <Container className={styles["recommended-container"]}>
                 <Row>
                     {recommendations.slice(0, 7).map((movie) => (
                         <img
                             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                             key={movie.id}
-                            className="card-image"
+                            className={styles["recommended-container__card"]}
                         />
                     ))}
                 </Row>

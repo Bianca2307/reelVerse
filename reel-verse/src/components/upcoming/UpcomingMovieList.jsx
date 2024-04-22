@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-import MovieCard from "../common/MovieCard";
+import MovieCard from "../common/MovieCard/MovieCard";
+import styles from "./UpcomingMovies.module.css"
 
 
 export default function UpcomingMovieList(props) {
@@ -9,7 +10,7 @@ export default function UpcomingMovieList(props) {
     console.log(upcoming);
 
     return (
-        <div className="container">
+        <div className={styles["upcoming-list-container"]}>
             {upcoming.map((movie) => (
                 <Link to={`/movies/${movie.id}`} key={movie.id}>
                     <MovieCard

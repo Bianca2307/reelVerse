@@ -10,6 +10,8 @@ import NowPlayingCardComponent from "../../components/nowPlaying/NowPlayingCardC
 import GenresList from "../../components/genres/GenresList";
 import SearchMoviesList from "../../components/search/SearchMoviesList";
 import user from "../../assets/user.png";
+import Button from "../../components/common/Button";
+import style from "./Movie.module.css";
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -17,11 +19,31 @@ export default function Movies() {
     const [restrictButtonClicked, setRestrictButtonClicked] = useState(false);
     const [genres, setGenres] = useState([]);
     const [showGenres, setShowGenres] = useState(false);
+    const [activeGenre, setActiveGenre] = useState(null);
     const [formData, setFormData] = useSearchParams();
     const query = formData.get("query");
     const [searchMovies, setSearchMovies] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
+
+    const genreCategories = [
+        { id: 16, label: t("movies.ANIMATION") },
+        { id: 35, label: t("movies.COMEDY") },
+        { id: 80, label: t("movies.CRIME") },
+        { id: 99, label: t("movies.DOCUMENTARY") },
+        { id: 18, label: t("movies.DRAMA") },
+        { id: 10751, label: t("movies.FAMILY") },
+        { id: 14, label: t("movies.FANTASY") },
+        { id: 36, label: t("movies.HISTORY") },
+        { id: 27, label: t("movies.HORROR") },
+        { id: 10402, label: t("movies.MUSIC") },
+        { id: 9648, label: t("movies.MISTERY") },
+        { id: 10749, label: t("movies.ROMANCE") },
+        { id: 878, label: t("movies.SCIENCE") },
+        { id: 10770, label: t("movies.TV") },
+        { id: 53, label: t("movies.THRILLER") },
+        { id: 10752, label: t("movies.WAR") },
+    ];
 
     const styles = {
         visibility: expandButtonClicked ? "hidden" : "visible",
@@ -36,6 +58,16 @@ export default function Movies() {
         setShowGenres(true);
     }
 
+    const handleGenreClick = (id) => {
+        if (activeGenre === id) {
+            setActiveGenre(null);
+        } else {
+            setActiveGenre(id);
+            fetchGenres(id);
+            setActiveCategory("");
+        }
+    };
+
     function handleChange(event) {
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -48,7 +80,8 @@ export default function Movies() {
 
     async function fetchSearch() {
         const res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`)
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+        );
         const data = await res.json();
         setSearchMovies(data.results);
     }
@@ -63,19 +96,23 @@ export default function Movies() {
 
     return (
         <>
-            {/* <button onClick={handleLogout}>Logout</button> */}
-            <div className="movies-container">
-                <section className="inner_content new_index background_8">
-                    <div className="media discover">
-                        <div className="column_wrapper">
-                            <div className="content_wrapper wrap">
-                                <div className="title">
-                                    <h2>{t("welcome")}</h2>
-                                    <h3>{t("explore")}</h3>
+            <div className={style["movies-container"]}>
+                <section className={`${style.new_index} ${style.background_8}`}>
+                    <div className={`${style.media} ${style.discover}`}>
+                        <div className={style["column_wrapper"]}>
+                            <div
+                                className={`${style.content_wrapper} ${style.wrap}`}
+                            >
+                                <div className={style["title"]}>
+                                    <h2>{t("movies.WELCOME")}</h2>
+                                    <h3>{t("movies.EXPLORE")}</h3>
                                 </div>
-                                <div className="search">
-                                    <form className="search-movies">
+                                <div className={style["search"]}>
+                                    <form className={style["search-movies"]}>
                                         <input
+                                            className={
+                                                style["search-movies--input"]
+                                            }
                                             type="text"
                                             placeholder="Search"
                                             name="query"
@@ -83,7 +120,7 @@ export default function Movies() {
                                             onChange={handleChange}
                                         />
                                         <button onClick={handleSubmit}>
-                                            {t("search_btn")}
+                                            {t("movies.SEARCH")}
                                         </button>
                                     </form>
                                 </div>
@@ -92,206 +129,117 @@ export default function Movies() {
                     </div>
                 </section>
 
-                <div className="filter-container">
-                    <button
+                <div className={style["filter-container"]}>
+                    <Button
+                        theme="light"
+                        type="text"
                         onClick={() => {
-                            fetchGenres(28);
-                            setActiveCategory("");
+                            handleGenreClick(28);
+                        }}
+                        style={{
+                            backgroundColor:
+                                activeGenre === 28 ? "white" : "#1a2237",
+                            color: activeGenre === 28 ? "black" : "white",
                         }}
                     >
-                        {t("action_btn")}
-                    </button>
-                    <button
+                        {t("movies.ACTION")}
+                    </Button>
+                    <Button
+                        theme="light"
+                        type="text"
                         onClick={() => {
-                            fetchGenres(12);
-                            setActiveCategory("");
+                            handleGenreClick(12);
+                        }}
+                        style={{
+                            backgroundColor:
+                                activeGenre === 12 ? "white" : "#1a2237",
+                            color: activeGenre === 12 ? "black" : "white",
                         }}
                     >
-                        {t("adventure_btn")}
-                    </button>
+                        {t("movies.ADVENTURE")}
+                    </Button>
 
                     {expandButtonClicked && !restrictButtonClicked && (
                         <>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(16);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("animation_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(35);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("comedy_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(80);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("crime_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(99);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("documentary_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(18);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("drama_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(10751);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("family_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(14);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("fantasy_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(36);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("history_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(27);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("horror_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(10402);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("music_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(9648);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("mistery_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(10749);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("romance_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(878);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("science_btn")}{" "}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(10770);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("tv_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(53);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("thriller_btn")}
-                            </button>
-                            <button
-                                onClick={() => {
-                                    fetchGenres(10752);
-                                    setActiveCategory("");
-                                }}
-                            >
-                                {t("war_btn")}
-                            </button>
-                            <button
-                                className="more"
+                            {genreCategories.map((category) => (
+                                <Button
+                                    key={category.id}
+                                    theme="light"
+                                    type="text"
+                                    onClick={() => {
+                                        handleGenreClick(category.id);
+                                    }}
+                                    style={{
+                                        backgroundColor:
+                                            activeGenre === category.id
+                                                ? "white"
+                                                : "#1a2237",
+                                        color:
+                                            activeGenre === category.id
+                                                ? "black"
+                                                : "white",
+                                    }}
+                                >
+                                    {category.label}
+                                </Button>
+                            ))}
+                            <Button
+                                theme="transparent"
+                                type="icon"
+                                icon={
+                                    <svg
+                                        stroke="currentColor"
+                                        fill="currentColor"
+                                        strokeWidth="0"
+                                        viewBox="0 0 24 24"
+                                        height="1em"
+                                        width="1em"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M18 6h2v12h-2zm-2 5H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H16z"></path>
+                                    </svg>
+                                }
                                 onClick={() => {
                                     setRestrictButtonClicked(true);
                                     setExpandButtonClicked(false);
                                 }}
-                            >
-                                <svg
-                                    stroke="currentColor"
-                                    fill="currentColor"
-                                    strokeWidth="0"
-                                    viewBox="0 0 24 24"
-                                    height="1em"
-                                    width="1em"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path d="M18 6h2v12h-2zm-2 5H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H16z"></path>
-                                </svg>
-                            </button>
+                            ></Button>
                         </>
                     )}
-                    <button
-                        className="more"
+                    <Button
+                        theme="transparent"
+                        type="icon"
+                        icon={
+                            <svg
+                                stroke="currentColor"
+                                fill="currentColor"
+                                strokeWidth="0"
+                                viewBox="0 0 24 24"
+                                height="1em"
+                                width="1em"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                            </svg>
+                        }
                         onClick={() => {
                             setExpandButtonClicked(true);
                             setRestrictButtonClicked(false);
                         }}
                         style={styles}
-                    >
-                        <svg
-                            stroke="currentColor"
-                            fill="currentColor"
-                            strokeWidth="0"
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path fill="none" d="M0 0h24v24H0z"></path>
-                            <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                        </svg>
-                    </button>
+                    ></Button>
                 </div>
                 {showGenres && <GenresList genresList={genres} />}
             </div>
-            <div className="panel">
+            <div className={style["panel"]}>
                 <div>
                     {" "}
                     <svg
                         onClick={() => {
                             setActiveCategory("popular");
                             setShowGenres(false);
+                            setActiveGenre(false);
                         }}
                         style={{
                             color:
@@ -314,6 +262,7 @@ export default function Movies() {
                         onClick={() => {
                             setActiveCategory("playing");
                             setShowGenres(false);
+                            setActiveGenre(false);
                         }}
                         style={{
                             color:
@@ -336,6 +285,7 @@ export default function Movies() {
                         onClick={() => {
                             setActiveCategory("trending");
                             setShowGenres(false);
+                            setActiveGenre(false);
                         }}
                         style={{
                             color:
@@ -357,6 +307,7 @@ export default function Movies() {
                         onClick={() => {
                             setActiveCategory("upcoming");
                             setShowGenres(false);
+                            setActiveGenre(false);
                         }}
                         style={{
                             color:
@@ -374,7 +325,7 @@ export default function Movies() {
                     >
                         <path d="M18 11c0-.959-.68-1.761-1.581-1.954C16.779 8.445 17 7.75 17 7c0-2.206-1.794-4-4-4-1.517 0-2.821.857-3.5 2.104C8.821 3.857 7.517 3 6 3 3.794 3 2 4.794 2 7c0 .902.312 1.727.817 2.396A1.994 1.994 0 0 0 2 11v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-2.638l4 2v-7l-4 2V11zm-5-6c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2zM6 5c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2zM4 19v-8h12l.002 8H4z"></path>
                     </svg>
-                    <div className="user-account">
+                    <div className={style["user-account"]}>
                         <Link to="/profile">
                             <img src={user} />
                         </Link>

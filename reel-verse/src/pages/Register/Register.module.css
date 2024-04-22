@@ -1,0 +1,31 @@
+
+.register-title {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    padding: var(--spacing-small) 5px;
+    color: var(--white);
+    padding: var(--spacing-small) 5px;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.register-form__label {
+    color: var(--white);
+}
+
+.register-form {
+    margin-left: 500px;
+}
+.register-form__input {
+    width: 50% !important;
+}
+
+#formBasicEmail,
+#formBasicPassword {
+    width: 50%;
+    height: 50px;
+}
+.sign-button {
+    width: 50%;
+}

@@ -1,0 +1,13 @@
+.profile-container {
+    display: grid;
+    justify-content: center;
+}
+
+#user-profile {
+    height: 180px;
+    width: 200px;
+}
+
+.profile-container__icons {
+    margin: 10px 0px;
+}

@@ -1,0 +1,27 @@
+:root {
+    --spacing-medium: 20px;
+    --spacing--large: 25px;
+    --white: #ffffff;
+}
+
+.trending-container {
+    padding: var(--spacing--large) var(--spacing-medium);
+    margin-left: 70px;
+}
+.trending-container__title {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    padding: var(--spacing-small) 5px;
+    color: var(--white);
+}
+
+.trending-list-container {
+    grid-gap: 1rem;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.trending-list-container a {
+    text-decoration: none;
+}

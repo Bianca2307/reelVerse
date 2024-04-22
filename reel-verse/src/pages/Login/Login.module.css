@@ -1,0 +1,51 @@
+:root {
+    --white: #ffffff;
+    --spacing-small: 10px;
+   
+}
+.login-title {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    padding: var(--spacing-small) 5px;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.login-form {
+    margin-left: 500px;
+}
+
+.login-form__label {
+    color: var(--white);
+}
+
+.login-form__input {
+    width:50% !important;
+}
+
+#formBasicEmail,
+#formBasicPassword {
+    width: 50%;
+    height: 50px;
+}
+
+#sign-up-text {
+    display: flex;
+    align-items: center;
+
+}
+
+.sign-button {
+   width:20%;
+}
+
+.signIn-signUp{
+    display: grid;
+    margin-left:150px;
+}
+
+.text-muted {
+    color: var(--white) !important;
+}

@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import MovieCard from "../common/MovieCard";
+import { Link } from "react-router-dom";
 
-import {Link} from "react-router-dom"
+import MovieCard from "../common/MovieCard/MovieCard";
+import styles from "./Popular.module.css"
 
 export default function PopularMovieList(props) {
     const movies = props.popularMovies;
     return (
-        <div className="container">
+        <div className={styles["popular-list-container"]}>
             {movies.map((movie) => (
                 <Link to={`/movies/${movie.id}`} key={movie.id}>
                     <MovieCard
