@@ -1,22 +1,19 @@
 :root {
     --black: black;
     --white: #ffffff;
-
     --spacing-small: 10px;
     --spacing-medium: 20px;
     --spacing--large: 25px;
     --spacing-xlarge: 40px;
-
     --height-large: 100%;
-
     --width-large: 100%;
-
     --border-small: 15px;
     --border-medium: 25px;
     --border-large: 30px;
+    --image-1x: url(https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/xpba0Dxz3sxV3QgYLR8UIe1LAAX.jpg);
+    --image-2x: url(https://media.themoviedb.org/t/p/w3840_and_h1200_multi_faces_filter(duotone,00192f,00baff)/xpba0Dxz3sxV3QgYLR8UIe1LAAX.jpg);
 }
 
-/**NAVBAR **/
 .navbar {
     padding: 5px;
 }
@@ -27,10 +24,8 @@
     font-weight: 900;
     color: var(--white);
     font-size: 20px;
+    margin-right: 8px;
 }
-
-
-
 .navbar a:hover {
     color: rgb(13, 181, 218);
     border-bottom: 1px solid rgb(13, 181, 218);
@@ -59,8 +54,6 @@ a.active-link {
     color: var(--white);
 }
 
-
-/***HOME PAGE ***/
 body {
     /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)), url("./assets/img.png") no-repeat center center;
     -webkit-background-size: cover;
@@ -71,8 +64,7 @@ body {
     background-color: #10141e;
 }
 
-.form-home {
-
+.form {
     margin-left: 500px;
 }
 
@@ -148,26 +140,18 @@ label {
     width:35px;
     height: 35px;
 }
-
-/* .panel svg.active {
-    color: #fff;
-} */
-
-/***MOVIES PAGE ***/
 .container {
     grid-gap: 1rem;
     display: grid;
     gap: 3rem;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-
-
 }
 
 .container a {
     text-decoration: none;
 }
 
-.myContainer {
+.movies-container {
     padding: var(--spacing--large) var(--spacing-medium);
     padding: var(--spacing--large) var(--spacing-medium);
     margin-left: 70px;
@@ -260,9 +244,6 @@ section.new_index form {
     top: 0;
     left: 0;
 }
-
-
-
 .title {
     font-family: "Source Sans 3", sans-serif;
     font-weight: 900;
@@ -276,14 +257,11 @@ section.new_index form {
     font-family: "Source Sans 3", sans-serif;
     font-weight: 700;
     font-size: 17px;
-
 }
 
 .card-title a {
     text-decoration: none;
 }
-
-
 
 div.consensus.tight {
     width: 38px;
@@ -448,44 +426,6 @@ div.consensus .user_score_chart canvas {
     background-color: #141a20;
 }
 
-/*** MOVIE DETAIL ***/
-.movieDetail--container {
-    background-color: var(--black);
-    background-color: var(--black);
-}
-
-iframe {
-    margin-left: 200px;
-}
-
-
-
-.movie-overview {
-    font-family: "Source Sans 3", sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.recommended-container {
-    margin-top: 20px;
-
-
-}
-
-.card-image {
-    width: 200px;
-
-}
-
-.related-title {
-    color: var(--white);
-    padding: var(--spacing-small) 15px;
-    color: var(--white);
-    padding: var(--spacing-small) 15px;
-    margin-top: 20px;
-}
-
-/** SEARCH **/
 .search-movies {
     border-radius: var(--border-medium);
     border-radius: var(--border-medium);
@@ -523,7 +463,7 @@ section.new_index form button {
     padding: var(--spacing-small) 26px;
     border: 0;
     background: linear-gradient(to right, rgba(30,
-                213,
+               213,
                 169, 1) 0%, rgba(1,
                 180,
                 228, 1) 100%);
@@ -539,3 +479,54 @@ section.new_index form button:hover {
     color: var(--black);
     color: var(--black);
 }
+
+.profile-container{
+    display:grid;
+    justify-content: center;
+
+}
+.profile-container__icons{
+    margin:10px 0px;
+    
+}
+#user-profile {
+    height:180px;
+    width:200px;
+}
+
+.icon-btn{
+    width: 80px;
+    background-color: none;
+    margin-right: 30px;
+}
+.details-container {
+    background-color: var(--black);
+    background-color: var(--black);
+}
+
+iframe {
+    margin-left: 200px;
+}
+.details-container__overview {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.recommended-container {
+    margin-top: 20px;
+}
+
+.card-image {
+    width: 200px;
+
+}
+
+.related-title {
+    color: var(--white);
+    padding: var(--spacing-small) 15px;
+    color: var(--white);
+    padding: var(--spacing-small) 15px;
+    margin-top: 20px;
+}
+

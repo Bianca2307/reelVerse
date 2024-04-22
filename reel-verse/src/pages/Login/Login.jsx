@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { useTranslation } from "react-i18next";
@@ -44,7 +45,7 @@ export default function Login() {
     return (
         <>
             <h2 className="register-title">Welcome back</h2>
-            <Form className="form-home" onSubmit={handleSubmit}>
+            <Form className="form" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control

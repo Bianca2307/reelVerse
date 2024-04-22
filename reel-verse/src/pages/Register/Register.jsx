@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function Register() {
@@ -40,8 +40,8 @@ export default function Register() {
 
     return (
         <>
-            <h2 className="register-title">{ t('register')}</h2>
-            <Form className="form-home" onSubmit={handleSubmit}>
+            <h2 className="register-title">{t('register')}</h2>
+            <Form className="form" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
