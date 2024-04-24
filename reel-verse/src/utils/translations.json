@@ -28,7 +28,9 @@
     "science_btn":"Science Fiction",
     "tv_btn":"TV Movie",
     "thriller_btn":"Thriller",
-    "war_btn":"War"
+    "war_btn":"War",
+    "movies":"Movies",
+    "logOut":"Log out"
 
 
 

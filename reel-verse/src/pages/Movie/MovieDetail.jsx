@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-
-
 export default function MovieDetail() {
     const params = useParams();
     console.log(params);
@@ -35,7 +33,7 @@ export default function MovieDetail() {
     }, []);
 
     return (
-        <div className="movieDetail--container">
+        <div className="details-container">
             {videoKey && (
                 <iframe
                     title="movie-video"
@@ -46,7 +44,7 @@ export default function MovieDetail() {
                     allowFullScreen
                 ></iframe>
             )}
-            <div className="movie-overview">{movieDetail.overview}</div>
+            <div className="details-container__overview">{movieDetail.overview}</div>
             <h2 className="related-title">Related</h2>
             <Container className="recommended-container">
                 <Row>
