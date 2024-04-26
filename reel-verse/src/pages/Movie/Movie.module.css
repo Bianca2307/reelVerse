@@ -156,7 +156,11 @@ section.new_index form button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin: 20px 0;
+    margin-top:15px;
+    margin:20px 0px;
+}
+.filter-container > button {
+    margin-right:3px;
 }
 
 .panel {
