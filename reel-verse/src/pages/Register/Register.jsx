@@ -4,14 +4,16 @@ import { useState } from "react";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+import styles from "./Register.module.css"
 
 export default function Register() {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
-
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -40,11 +42,16 @@ export default function Register() {
 
     return (
         <>
-            <h2 className="register-title">{t('register')}</h2>
-            <Form className="form" onSubmit={handleSubmit}>
+            <h2 className={styles["register-title"]}>
+                {t("register.REGISTER")}
+            </h2>
+            <Form className={styles["register-form"]} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label className={styles["register-form__label"]}>
+                        {t("login.EMAIL")}
+                    </Form.Label>
                     <Form.Control
+                        className={styles["register-form__input"]}
                         type="email"
                         placeholder="Enter email"
                         name="email"
@@ -55,8 +62,11 @@ export default function Register() {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className={styles["register-form__label"]}>
+                        {t("login.PASSWORD")}
+                    </Form.Label>
                     <Form.Control
+                        className={styles["register-form__input"]}
                         type="password"
                         placeholder="Password"
                         name="password"
@@ -66,8 +76,12 @@ export default function Register() {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="sign-button">
-                    {t('signUp')}
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className={styles["sign-button"]}
+                >
+                    {t("register.SIGN_UP")}
                 </Button>
             </Form>
         </>

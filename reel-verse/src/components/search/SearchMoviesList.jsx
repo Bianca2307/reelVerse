@@ -1,11 +1,15 @@
 /* eslint-disable react/prop-types */
-import MovieCard from "../common/MovieCard";
+import MovieCard from "../common/MovieCard/MovieCard";
+import styles from "./SearchMovies.module.css"
+import { useTranslation } from "react-i18next";
 
 export default function SearchMoviesList(props) {
+    const { t } = useTranslation();
+
     return (
-        <div className="myContainer">
-            <h2 className="title">Searched movies</h2>
-            <div className="container">
+        <div className={styles["search-container"]}>
+            <h2 className={styles["search-container__title"]}>{t("searched.SEARCHED")}</h2>
+            <div className={styles["search-list-container"]}>
                 {props.searchedMovies.map((movie) => (
                     <MovieCard
                         title={movie.title}

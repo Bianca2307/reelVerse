@@ -1,0 +1,43 @@
+:root {
+    --height-large: 100%;
+    --width-large: 100%;
+}
+
+.shadow {
+    position: relative;
+    overflow: hidden;
+}
+
+.shadow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--width-large);
+    height: var(--height-large);
+    background: linear-gradient(0deg, rgba(0, 0, 0, .75), transparent 50%, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.shadow:hover::before {
+    opacity: 1;
+}
+
+.card-title {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.card-title a {
+    text-decoration: none;
+}
+
+.card {
+    border: none;
+}
+.card-text {
+    font-family: "Source Sans 3", sans-serif;
+}
+

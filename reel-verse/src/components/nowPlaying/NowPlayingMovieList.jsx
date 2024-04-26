@@ -1,16 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-import MovieCard from "../common/MovieCard"
-
-
+import MovieCard from "../common/MovieCard/MovieCard"
+import styles from "./NowPlaying.module.css"
 
 export default function NowPlayingMovieList(props) {
-    
     const nowPlayingMovies = props.nowPlayingMovies
 
     return (
-        <div className="container">
+        <div className={styles["nowPlaying-list-container"]}>
             {nowPlayingMovies.map((movie) => (
                 <Link to={`/movies/${movie.id}`} key={movie.id}>
                     <MovieCard

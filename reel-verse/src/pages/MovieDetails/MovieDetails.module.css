@@ -1,0 +1,38 @@
+:root{
+    --black: black;
+    --white: #ffffff;
+    --spacing-small: 10px;
+}
+
+.details-container {
+    background-color: var(--black);
+    background-color: var(--black);
+}
+
+.details-container__overview {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+}
+
+.details-container__trailer{
+    margin-left: 200px;
+}
+
+.related-title {
+    color: var(--white);
+    padding: var(--spacing-small) 15px;
+    color: var(--white);
+    padding: var(--spacing-small) 15px;
+    margin-top: 20px;
+}
+
+.recommended-container {
+    margin-top: 20px;
+}
+
+.recommended-container__card {
+    width: 200px;
+
+}

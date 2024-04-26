@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef } from "react";
 
+import styles from "./ProgressCircle.module.css";
+
 const ProgressCircle = ({ percent, trackColor, barColor }) => {
     const canvasRef = useRef(null);
 
@@ -9,7 +11,7 @@ const ProgressCircle = ({ percent, trackColor, barColor }) => {
         const context = canvas.getContext("2d");
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
-        const radius = (canvas.width - 8) / 2; // Adjusted radius to fit inside the padding
+        const radius = (canvas.width - 8) / 2; 
 
         // Draw the track
         context.beginPath();
@@ -29,20 +31,21 @@ const ProgressCircle = ({ percent, trackColor, barColor }) => {
     }, [percent, trackColor, barColor]);
 
     return (
-        <div className="consensus tight">
-            <div className="outer_ring">
+        <div className={`${styles.consensus} ${styles.tight}`}>
+            <div className={styles["outer_ring"]}>
                 <div
-                    className="user_score_chart"
+                    className={styles["user_score_chart"]}
                     data-percent={percent}
                     data-track-color={trackColor}
                     data-bar-color={barColor}
                 >
-                    <div className="percent">
-                        <span className="icon icon-r72">
+                    <div className={styles["percent"]}>
+                        <span className={`${styles.icon} ${styles["icon-r72"]}`}>
                             {percent.toFixed(0)}%
                         </span>
                     </div>
                     <canvas
+                        className={styles["canvas"]}
                         ref={canvasRef}
                         height="42"
                         width="42"
