@@ -133,8 +133,9 @@ export default function Movies() {
                     </div>
                 </section>
 
-                <div className="filter-container">
+                <div className={style["filter-container"]}>
                     <Button
+                        type="text"
                         onClick={() => {
                             handleGenreClick(28);
                         }}

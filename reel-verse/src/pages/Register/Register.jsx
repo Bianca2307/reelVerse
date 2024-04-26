@@ -4,7 +4,6 @@ import { useState } from "react";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import styles from "./Register.module.css"

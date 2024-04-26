@@ -8,7 +8,7 @@ export default function NowPlayingMovieList(props) {
     const nowPlayingMovies = props.nowPlayingMovies
 
     return (
-        <div className={styles["nowPlaying-list-container"]}>
+        <div className={styles["now-playing-list-container"]}>
             {nowPlayingMovies.map((movie) => (
                 <Link to={`/movies/${movie.id}`} key={movie.id}>
                     <MovieCard
