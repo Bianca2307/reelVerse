@@ -4,6 +4,7 @@ import { BiPlusCircle } from "react-icons/bi";
 import Button from "../../components/common/Button";
 import user from "../../assets/user.png";
 import styles from "./Profile.module.css"
+import { COLORS } from "../../utils/theme";
 
 export default function Profile() {
     return (
@@ -13,13 +14,13 @@ export default function Profile() {
                 <div>
                     <Button
                         size="sm"
-                        style={{ height: 65, marginRight: 30 }}
+                        style={{ height: 65, marginRight: 30, backgroundColor:COLORS.WHITE }}
                         type="icon"
-                        icon={<BiBookmarkHeart style={{ fontSize: "4rem" }} />}
+                        icon={<BiBookmarkHeart style={{ fontSize: "4rem"}} />}
                     ></Button>
                     <Button
                         size="sm"
-                        style={{ height: 65 }}
+                        style={{ height: 65, backgroundColor:COLORS.WHITE }}
                         type="icon"
                         icon={<BiPlusCircle style={{ fontSize: "4rem" }} />}
                     ></Button>

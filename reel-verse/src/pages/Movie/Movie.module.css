@@ -3,6 +3,8 @@
     --width-large: 100%;
     --black: black;
     --white: #ffffff;
+    --light-black: #171e31;
+    --light-gray: #546487;
     --spacing-small: 10px;
     --spacing-medium: 20px;
     --spacing--large: 25px;
@@ -10,6 +12,7 @@
     --border-small: 15px;
     --border-medium: 25px;
     --border-large: 30px;
+
 }
 
 .movies-container {
@@ -109,7 +112,7 @@ section.new_index form {
     left: 0;
 }
 
-.search-movies--input {
+.search-movies__input {
     width: 100%;
     height: 46px;
     line-height: 46px;
@@ -157,7 +160,7 @@ section.new_index form button:hover {
 }
 
 .panel {
-    background-color: #171e31;
+    background-color: var(--light-black);
     border-radius: var(--border-small);
     height: 342px;
     justify-content: space-between;
@@ -174,7 +177,7 @@ section.new_index form button:hover {
 }
 
 .panel svg {
-    color: #546487;
+    color: var(--light-gray);
     cursor: pointer;
     font-size: 26px;
 }

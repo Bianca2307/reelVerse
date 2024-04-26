@@ -1,43 +1,45 @@
 export const BACKGROUND_COLORS = {
-    darkBackground: '#212529',
-    primaryBackground: '#0d6efd',
-    lightBackground: '#1a2237',
-    transparentBackground: "transparent",
-    grayBackground: "#f8f9fa",
+    DARK_BACKGROUND: '#212529',
+    PRIMARY_BACKGROUND: '#0d6efd',
+    LIGHT_BACKGROUND: '#1a2237',
+    TRANSPARENT_BACKGROUND: "transparent",
+    GRAY_BACKGROUND: "#f8f9fa",
+    WHITE:"#fff"
 }
 
 export const COLORS = {
-    lightGray: "#8b99b6",
-    white: "#fff",
-    black: "black"
+    LIGHT_GRAY: "#8b99b6",
+    WHITE: "#fff",
+    BLACK: "black",
+    GRAY: "#546487"
 }
 
 export const HEIGHT_SIZES = {
-    sm: '34px',
-    md: '37px',
-    lg: '40px',
-    default: "35px"
+    SM: '34px',
+    MD: '37px',
+    LG: '40px',
+    DEFAULT: "35px"
 }
 
 export const PADDING_SIZES = {
-    sm: '18px',
-    md: '23px',
-    lg: '26px',
-    default: "17px"
+    SM: '18px',
+    MD: '23px',
+    LG: '26px',
+    DEFAULT: "17px"
 
 }
 export const SIZE_VALUE = {
-    sm:"sm",
-    md: "md",
-    lg:"lg"
+    SM:"sm",
+    MD: "md",
+    LG:"lg"
 
 }
 
 export const THEME_COLORS = {
-    light:COLORS.lightBackground,
-    transparent: "transparent",
-    dark:COLORS.darkBackground,
-    primary:COLORS.primaryBackground,
+    LIGHT:BACKGROUND_COLORS.LIGHT_BACKGROUND,
+    TRANSPARENT: BACKGROUND_COLORS.TRANSPARENT,
+    DARK:BACKGROUND_COLORS.DARK_BACKGROUND,
+    PRIMARY: BACKGROUND_COLORS.PRIMARY_BACKGROUND
 };
 
 export const ICON_POSITION = Object.freeze({
@@ -46,8 +48,8 @@ export const ICON_POSITION = Object.freeze({
 });
 
 export const BUTTON_TYPE = {
-    "button": "button",
-    "icon": "icon",
-    "iconAndText": "iconAndText",
-    "text": "text"
+    BUTTON: "button",
+    ICON: "icon",
+    ICON_AND_TEXT: "iconAndText",
+    TEXT: "text"
 }

@@ -1,6 +1,15 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { BACKGROUND_COLORS, COLORS, HEIGHT_SIZES, PADDING_SIZES, ICON_POSITION, THEME_COLORS, SIZE_VALUE, BUTTON_TYPE } from "../../utils/theme";
+import {
+    BACKGROUND_COLORS,
+    COLORS,
+    HEIGHT_SIZES,
+    PADDING_SIZES,
+    ICON_POSITION,
+    THEME_COLORS,
+    SIZE_VALUE,
+    BUTTON_TYPE,
+} from "../../utils/theme";
 
 const ButtonComponent = styled.button`
     position: relative;
@@ -16,37 +25,39 @@ const ButtonComponent = styled.button`
     font-weight: 500;
     padding: 0
         ${(props) =>
-        props.size === SIZE_VALUE.sm
-            ? PADDING_SIZES.sm
-            : props.size === SIZE_VALUE.md
-                ? PADDING_SIZES.md
-                : props.size === SIZE_VALUE.lg
-                    ? PADDING_SIZES.lg
-                    : PADDING_SIZES.default};
+        props.size === SIZE_VALUE.SM
+            ? PADDING_SIZES.SM
+            : props.size === SIZE_VALUE.MD
+                ? PADDING_SIZES.MD
+                : props.size === SIZE_VALUE.LG
+                    ? PADDING_SIZES.LG
+                    : PADDING_SIZES.DEFAULT};
     height: ${(props) =>
-        props.size === SIZE_VALUE.sm
-            ? HEIGHT_SIZES.sm
-            : props.size === SIZE_VALUE.md
-                ? HEIGHT_SIZES.md
-                : props.size === SIZE_VALUE.lg
-                    ? HEIGHT_SIZES.lg
-                    : HEIGHT_SIZES.default};
+        props.size === SIZE_VALUE.SM
+            ? HEIGHT_SIZES.SM
+            : props.size === SIZE_VALUE.MD
+                ? HEIGHT_SIZES.MD
+                : props.size === SIZE_VALUE.LG
+                    ? HEIGHT_SIZES.LG
+                    : HEIGHT_SIZES.DEFAULT};
     background-color: ${(props) =>
-        props.theme === THEME_COLORS["light"]
-            ? BACKGROUND_COLORS.lightBackground
-            : props.theme === THEME_COLORS["transparent"]
-                ? BACKGROUND_COLORS.transparentBackground
-                : props.theme === THEME_COLORS["dark"]
-                    ? BACKGROUND_COLORS.darkBackground
-                    : props.theme === THEME_COLORS["primary"]
-                        ? BACKGROUND_COLORS.darkBackground
-                        : BACKGROUND_COLORS.grayBackground};
+        props.theme === THEME_COLORS.LIGHT
+            ? BACKGROUND_COLORS.LIGHT_BACKGROUND
+            : props.type === BUTTON_TYPE.ICON
+                ? BACKGROUND_COLORS.TRANSPARENT_BACKGROUND
+                : props.theme === THEME_COLORS.DARK
+                    ? BACKGROUND_COLORS.DARK_BACKGROUND
+                    : props.theme === THEME_COLORS.PRIMARY
+                        ? BACKGROUND_COLORS.DARK_BACKGROUND
+                        : props.theme === THEME_COLORS.WHITE
+                            ? BACKGROUND_COLORS.WHITE
+                            : BACKGROUND_COLORS.GRAY_BACKGROUND};
     color: ${(props) =>
-        props.theme === THEME_COLORS["transparent"]
-            ? COLORS.lightGray
-            : props.theme === THEME_COLORS["light"]
-                ? COLORS.white
-                : COLORS.black};
+        props.type === BUTTON_TYPE.ICON
+            ? COLORS.LIGHT_GRAY
+            : props.theme === THEME_COLORS.LIGHT
+                ? COLORS.WHITE
+                : COLORS.BLACK};
 `;
 const Icon = styled.span`
     display: flex;
@@ -64,11 +75,11 @@ export default function Button({
     children,
     style,
     icon,
-    iconPosition
+    iconPosition,
 }) {
     return (
         <ButtonComponent
-            type={type || BUTTON_TYPE.button}
+            type={type || BUTTON_TYPE.BUTTON}
             theme={theme}
             className={
                 className ? `btn-component ${className}` : "btn-component"
@@ -80,8 +91,8 @@ export default function Button({
             icon={icon}
             iconPosition={iconPosition}
         >
-            {type === BUTTON_TYPE.icon && icon && <Icon>{icon}</Icon>}
-            {type === BUTTON_TYPE.iconAndText && icon && children && (
+            {type === BUTTON_TYPE.ICON && icon && <Icon>{icon}</Icon>}
+            {type === BUTTON_TYPE.ICON_AND_TEXT && icon && children && (
                 <>
                     {icon && iconPosition === ICON_POSITION.LEFT && (
                         <Icon>{icon}</Icon>
@@ -92,19 +103,25 @@ export default function Button({
                     )}
                 </>
             )}
-            {type === BUTTON_TYPE.text && children && <span>{children}</span>}
+            {type === BUTTON_TYPE.TEXT && children && <span>{children}</span>}
         </ButtonComponent>
     );
 }
 
 Button.propTypes = {
-    type: PropTypes.oneOf(["button","icon","iconAndText","text"]),
-    theme: PropTypes.oneOf(["light", "transparent", "dark", "primary"]),
+    type: PropTypes.oneOf(["button", "icon", "iconAndText", "text"]),
+    theme: PropTypes.oneOf([
+        "light",
+        "transparent",
+        "dark",
+        "primary",
+        "white",
+    ]),
     size: PropTypes.oneOf(["sm", "md", "lg"]),
     className: PropTypes.string,
     id: PropTypes.string,
     onClick: PropTypes.func,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     style: PropTypes.object,
     icon: PropTypes.node,
     iconPosition: PropTypes.oneOf(["left", "right"]),

@@ -43,7 +43,7 @@ export default function Register() {
     return (
         <>
             <h2 className={styles["register-title"]}>
-                {t("register.REGISTER")}
+                {t("REGISTER.REGISTER")}
             </h2>
             <Form className={styles["register-form"]} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -63,7 +63,7 @@ export default function Register() {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className={styles["register-form__label"]}>
-                        {t("login.PASSWORD")}
+                        {t("LOGIN.PASSWORD")}
                     </Form.Label>
                     <Form.Control
                         className={styles["register-form__input"]}
@@ -81,7 +81,7 @@ export default function Register() {
                     type="submit"
                     className={styles["sign-button"]}
                 >
-                    {t("register.SIGN_UP")}
+                    {t("REGISTER.SIGN_UP")}
                 </Button>
             </Form>
         </>

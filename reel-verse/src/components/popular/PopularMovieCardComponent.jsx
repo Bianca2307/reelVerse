@@ -12,7 +12,7 @@ export default function PopularMovieCardComponent() {
 
     return (
         <div className={styles["popular-container"]}>
-            <h2 className={styles["popular-container__title"]}>{t('popular.POPULAR')}</h2>
+            <h2 className={styles["popular-container__title"]}>{t('POPULAR.POPULAR')}</h2>
             <PopularMovieList popularMovies={popularMovies} />
         </div>
     );

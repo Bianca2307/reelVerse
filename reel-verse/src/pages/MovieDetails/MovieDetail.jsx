@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
 import styles from "./MovieDetails.module.css"
+import { TMDB_API_BASE_URL,API_KEY, BASE_IMAGE_URL } from "../../utils/constants";
 
 export default function MovieDetail() {
     const params = useParams();
@@ -15,10 +16,10 @@ export default function MovieDetail() {
     useEffect(() => {
         Promise.all([
             fetch(
-                `https://api.themoviedb.org/3/movie/${params.id}?api_key=d773193a88ede0c03b5da21759b8dea6&append_to_response=videos`
+                `${TMDB_API_BASE_URL}/movie/${params.id}?api_key=${API_KEY}&append_to_response=videos`
             ).then((res) => res.json()),
             fetch(
-                `https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=d773193a88ede0c03b5da21759b8dea6&append_to_response=videos`
+                `${TMDB_API_BASE_URL}/movie/${params.id}/recommendations?api_key=${API_KEY}&append_to_response=videos`
             ).then((res) => res.json()),
         ])
             .then(([movieData, recommendationsData]) => {
@@ -55,7 +56,7 @@ export default function MovieDetail() {
                 <Row>
                     {recommendations.slice(0, 7).map((movie) => (
                         <img
-                            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                            src={`${BASE_IMAGE_URL}${movie.poster_path}`}
                             key={movie.id}
                             className={styles["recommended-container__card"]}
                         />
