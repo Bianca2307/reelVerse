@@ -1,10 +1,10 @@
 {
-    "nowPlaying": { "PLAYING": "Now Playing" },
-    "popular": {"POPULAR": "Popular Movies"},
-    "trending":{"TRENDING": "Trending Movie"},
-    "upcoming":{ "UPCOMING": "Upcoming Movies"},
-    "searched":{"SEARCHED":"Searched Movies"},
-    "movies": {
+    "NOW_PLAYING": { "PLAYING": "Now Playing" },
+    "POPULAR": {"POPULAR": "Popular Movies"},
+    "TRENDING":{"TRENDING": "Trending Movie"},
+    "UPCOMING":{ "UPCOMING": "Upcoming Movies"},
+    "SEARCHED":{"SEARCHED":"Searched Movies"},
+    "MOVIES": {
         "WELCOME": "Bun venit.",
         "EXPLORE": "Milioane de filme, seriale și oameni de descoperit.Explorați acum.",
         "SEARCH": "Search",
@@ -28,18 +28,18 @@
         "WAR": "War"
     },
 
-    "header": {
+    "HEADER": {
         "MOVIES": "Movies",
         "LOG_OUT": "Log out",
         "TITLE":"reelVerse"
     },
 
-    "register": {
+    "REGISTER": {
         "REGISTER": "Let's Register",
         "SIGN_UP": "Sign up"
     },
 
-    "login": {
+    "LOGIN": {
         "WELCOME_BACK": "Welcome back",
         "EMAIL": "Email address",
         "VALID_EMAIL": "Please enter a valid email address.",

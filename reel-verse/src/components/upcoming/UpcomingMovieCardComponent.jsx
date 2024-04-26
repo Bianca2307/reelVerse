@@ -12,7 +12,7 @@ export default function UpcomingMovieCardComponent() {
 
     return (
         <div className={styles["upcoming-container"]}>
-            <h2 className={styles["upcoming-container__title"]}>{t("upcoming.UPCOMING")}</h2>
+            <h2 className={styles["upcoming-container__title"]}>{t("UPCOMING.UPCOMING")}</h2>
             <UpcomingMovieList upcomingMovies={upcoming} />
         </div>
     );

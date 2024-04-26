@@ -12,7 +12,7 @@ export default function TrendingMovieCardComponent() {
     
     return (
         <div className={styles["trending-container"]}>
-            <h2 className={styles["trending-container__title"]}>{t("trending.TRENDING")}</h2>
+            <h2 className={styles["trending-container__title"]}>{t("TRENDING.TRENDING")}</h2>
             <TrendingMovieList topRated={topRatedMovies} />
         </div>
     );

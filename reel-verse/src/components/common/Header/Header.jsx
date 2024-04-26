@@ -22,7 +22,7 @@ export default function Header() {
         <header className={styles["navbar"]}>
             <Link to="/movies" className={styles["nav-logo"]}>
                 <img src={logo} alt="logo" />
-                <h3>{t('header.TITLE')}</h3>
+                <h3>{t('HEADER.TITLE')}</h3>
             </Link>
             <nav className={styles["navbar--links"]}>
                 <NavLink
@@ -31,7 +31,7 @@ export default function Header() {
                         isActive ? styles["active-link"] : null
                     }
                 >
-                    {t("header.MOVIES")}
+                    {t("HEADER.MOVIES")}
                 </NavLink>
                 <NavLink
                     to="/"
@@ -40,7 +40,7 @@ export default function Header() {
                     }
                     onClick={() => handleLogout()}
                 >
-                    {t("header.LOG_OUT")}
+                    {t("HEADER.LOG_OUT")}
                 </NavLink>
             </nav>
         </header>

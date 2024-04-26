@@ -12,6 +12,7 @@ import SearchMoviesList from "../../components/search/SearchMoviesList";
 import user from "../../assets/user.png";
 import Button from "../../components/common/Button";
 import style from "./Movie.module.css";
+import { COLORS, BACKGROUND_COLORS, THEME_COLORS } from "../../utils/theme";
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -21,28 +22,28 @@ export default function Movies() {
     const [showGenres, setShowGenres] = useState(false);
     const [activeGenre, setActiveGenre] = useState(null);
     const [formData, setFormData] = useSearchParams();
-    const query = formData.get("query");
+    const [searchQuery, setSearchQuery] = useState(formData.get("query") || "");
     const [searchMovies, setSearchMovies] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
 
     const genreCategories = [
-        { id: 16, label: t("movies.ANIMATION") },
-        { id: 35, label: t("movies.COMEDY") },
-        { id: 80, label: t("movies.CRIME") },
-        { id: 99, label: t("movies.DOCUMENTARY") },
-        { id: 18, label: t("movies.DRAMA") },
-        { id: 10751, label: t("movies.FAMILY") },
-        { id: 14, label: t("movies.FANTASY") },
-        { id: 36, label: t("movies.HISTORY") },
-        { id: 27, label: t("movies.HORROR") },
-        { id: 10402, label: t("movies.MUSIC") },
-        { id: 9648, label: t("movies.MISTERY") },
-        { id: 10749, label: t("movies.ROMANCE") },
-        { id: 878, label: t("movies.SCIENCE") },
-        { id: 10770, label: t("movies.TV") },
-        { id: 53, label: t("movies.THRILLER") },
-        { id: 10752, label: t("movies.WAR") },
+        { id: 16, label: t("MOVIES.ANIMATION") },
+        { id: 35, label: t("MOVIES.COMEDY") },
+        { id: 80, label: t("MOVIES.CRIME") },
+        { id: 99, label: t("MOVIES.DOCUMENTARY") },
+        { id: 18, label: t("MOVIES.DRAMA") },
+        { id: 10751, label: t("MOVIES.FAMILY") },
+        { id: 14, label: t("MOVIES.FANTASY") },
+        { id: 36, label: t("MOVIES.HISTORY") },
+        { id: 27, label: t("MOVIES.HORROR") },
+        { id: 10402, label: t("MOVIES.MUSIC") },
+        { id: 9648, label: t("MOVIES.MISTERY") },
+        { id: 10749, label: t("MOVIES.ROMANCE") },
+        { id: 878, label: t("MOVIES.SCIENCE") },
+        { id: 10770, label: t("MOVIES.TV") },
+        { id: 53, label: t("MOVIES.THRILLER") },
+        { id: 10752, label: t("MOVIES.WAR") },
     ];
 
     const styles = {
@@ -76,21 +77,22 @@ export default function Movies() {
 
         setActiveCategory("search");
         setShowGenres(false);
+        setSearchQuery(event.target.value);
     }
 
     async function fetchSearch() {
         const res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+            `${TMDB_API_BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=1&include_adult=false`
         );
         const data = await res.json();
         setSearchMovies(data.results);
+        
     }
 
     function handleSubmit(e) {
         e.preventDefault();
         fetchSearch();
-        formData.query = "";
-        formData.query = "";
+        setSearchQuery("");
         navigate(".");
     }
 
@@ -104,23 +106,25 @@ export default function Movies() {
                                 className={`${style.content_wrapper} ${style.wrap}`}
                             >
                                 <div className={style["title"]}>
-                                    <h2>{t("movies.WELCOME")}</h2>
-                                    <h3>{t("movies.EXPLORE")}</h3>
+                                    <h2>{t("MOVIES.WELCOME")}</h2>
+                                    <h3>{t("MOVIES.EXPLORE")}</h3>
                                 </div>
                                 <div className={style["search"]}>
-                                    <form className={style["search-movies"]}>
+                                    <form className={style["search-movies"]} onSubmit={handleSubmit}>
                                         <input
                                             className={
-                                                style["search-movies--input"]
+                                                style["search-movies__input"]
                                             }
                                             type="text"
                                             placeholder="Search"
                                             name="query"
-                                            value={formData.query}
-                                            onChange={handleChange}
+                                            value={searchQuery}
+                                            onChange={(event) => handleChange(event)}
                                         />
-                                        <button onClick={handleSubmit}>
-                                            {t("movies.SEARCH")}
+                                        <button
+                                            type="submit"
+                                        >
+                                            {t("MOVIES.SEARCH")}
                                         </button>
                                     </form>
                                 </div>
@@ -129,20 +133,23 @@ export default function Movies() {
                     </div>
                 </section>
 
-                <div className={style["filter-container"]}>
+                <div className="filter-container">
                     <Button
-                        theme="light"
-                        type="text"
                         onClick={() => {
                             handleGenreClick(28);
                         }}
                         style={{
                             backgroundColor:
-                                activeGenre === 28 ? "white" : "#1a2237",
-                            color: activeGenre === 28 ? "black" : "white",
+                                activeGenre === 28
+                                    ? BACKGROUND_COLORS.WHITE
+                                    : THEME_COLORS.LIGHT,
+                            color:
+                                activeGenre === 28
+                                    ? COLORS.BLACK
+                                    : COLORS.WHITE,
                         }}
                     >
-                        {t("movies.ACTION")}
+                        {t("MOVIES.ACTION")}
                     </Button>
                     <Button
                         theme="light"
@@ -152,11 +159,16 @@ export default function Movies() {
                         }}
                         style={{
                             backgroundColor:
-                                activeGenre === 12 ? "white" : "#1a2237",
-                            color: activeGenre === 12 ? "black" : "white",
+                                activeGenre === 12
+                                    ? BACKGROUND_COLORS.WHITE
+                                    : THEME_COLORS.LIGHT,
+                            color:
+                                activeGenre === 12
+                                    ? BACKGROUND_COLORS.BLACK
+                                    : BACKGROUND_COLORS.WHITE,
                         }}
                     >
-                        {t("movies.ADVENTURE")}
+                        {t("MOVIES.ADVENTURE")}
                     </Button>
 
                     {expandButtonClicked && !restrictButtonClicked && (
@@ -172,12 +184,12 @@ export default function Movies() {
                                     style={{
                                         backgroundColor:
                                             activeGenre === category.id
-                                                ? "white"
-                                                : "#1a2237",
+                                                ? BACKGROUND_COLORS.WHITE
+                                                : THEME_COLORS.LIGHT,
                                         color:
                                             activeGenre === category.id
-                                                ? "black"
-                                                : "white",
+                                                ? COLORS.BLACK
+                                                : COLORS.WHITE,
                                     }}
                                 >
                                     {category.label}
@@ -244,8 +256,8 @@ export default function Movies() {
                         style={{
                             color:
                                 activeCategory === "popular"
-                                    ? " #fff"
-                                    : "#546487",
+                                    ? COLORS.WHITE
+                                    : COLORS.GRAY,
                         }}
                         stroke="currentColor"
                         fill="currentColor"
@@ -267,8 +279,8 @@ export default function Movies() {
                         style={{
                             color:
                                 activeCategory === "playing"
-                                    ? " #fff"
-                                    : "#546487",
+                                    ? COLORS.WHITE
+                                    : COLORS.GRAY,
                         }}
                         stroke="currentColor"
                         fill="currentColor"
@@ -290,8 +302,8 @@ export default function Movies() {
                         style={{
                             color:
                                 activeCategory === "trending"
-                                    ? "#fff"
-                                    : "#546487",
+                                    ? COLORS.WHITE
+                                    : COLORS.GRAY,
                         }}
                         stroke="currentColor"
                         fill="currentColor"
@@ -312,8 +324,8 @@ export default function Movies() {
                         style={{
                             color:
                                 activeCategory === "upcoming"
-                                    ? " #fff"
-                                    : "#546487",
+                                    ? COLORS.WHITE
+                                    : COLORS.GRAY,
                         }}
                         stroke="currentColor"
                         fill="currentColor"

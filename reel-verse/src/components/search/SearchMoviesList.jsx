@@ -8,7 +8,7 @@ export default function SearchMoviesList(props) {
 
     return (
         <div className={styles["search-container"]}>
-            <h2 className={styles["search-container__title"]}>{t("searched.SEARCHED")}</h2>
+            <h2 className={styles["search-container__title"]}>{t("SEARCHED.SEARCHED")}</h2>
             <div className={styles["search-list-container"]}>
                 {props.searchedMovies.map((movie) => (
                     <MovieCard

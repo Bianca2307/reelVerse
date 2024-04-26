@@ -43,11 +43,11 @@ export default function Login() {
 
     return (
         <>
-            <h2 className={styles["login-title"]}>{t("login.WELCOME_BACK")}</h2>
+            <h2 className={styles["login-title"]}>{t("LOGIN.WELCOME_BACK")}</h2>
             <Form className={styles["login-form"]} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className={styles["login-form__label"]}>
-                        {t("login.EMAIL")}
+                        {t("LOGIN.EMAIL")}
                     </Form.Label>
                     <Form.Control
                         className={styles["login-form__input"]}
@@ -59,13 +59,13 @@ export default function Login() {
                         required
                     />
                     <Form.Control.Feedback type="invalid">
-                        {t("login.VALID_EMAIL")}
+                        {t("LOGIN.VALID_EMAIL")}
                     </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className={styles["login-form__label"]}>
-                        {t("login.PASSWORD")}
+                        {t("LOGIN.PASSWORD")}
                     </Form.Label>
                     <Form.Control
                         className={styles["login-form__input"]}
@@ -77,19 +77,19 @@ export default function Login() {
                         required
                     />
                 </Form.Group>
-                <div className={styles["signIn-signUp"]}>
+                <div className={styles["authentication-methods-container"]}>
                     <Button
                         variant="primary"
                         type="submit"
                         className={styles["sign-button"]}
                     >
-                        {t("login.SIGN_IN")}
+                        {t("LOGIN.SIGN_IN")}
                     </Button>
                     <Form.Text
                         className={styles["text-muted"]}
                         id={styles["sign-up-text"]}
                     >
-                        {t("login.DONT_HAVE_ACCOUNT")}
+                        {t("LOGIN.DONT_HAVE_ACCOUNT")}
                         <Link to="/register">{t("signUp")}</Link>
                     </Form.Text>
                 </div>

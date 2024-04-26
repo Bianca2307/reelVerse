@@ -1,8 +1,9 @@
 :root {
     --white: #ffffff;
     --spacing-small: 10px;
-   
+
 }
+
 .login-title {
     font-family: "Source Sans 3", sans-serif;
     font-weight: 900;
@@ -22,7 +23,7 @@
 }
 
 .login-form__input {
-    width:50% !important;
+    width: 50% !important;
 }
 
 #formBasicEmail,
@@ -38,12 +39,12 @@
 }
 
 .sign-button {
-   width:20%;
+    width: 20%;
 }
 
-.signIn-signUp{
+.authentication-methods-container {
     display: grid;
-    margin-left:150px;
+    margin-left: 150px;
 }
 
 .text-muted {
