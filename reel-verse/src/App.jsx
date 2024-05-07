@@ -22,12 +22,6 @@ function App() {
                         <Route path="/profile" element={<Profile />} />
                     </Route>
                 </Route>
-                <Route element={<Layout />}>
-                    <Route element={<Protected />}>
-                        <Route path="/movies" element={<Movies />} />
-                        <Route path="/movies/:id" element={<MovieDetail />} />
-                    </Route>
-                </Route>
             </Routes>
         </BrowserRouter>
     );

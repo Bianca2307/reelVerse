@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import 'firebase/firestore';
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB4odd7FZL7cUANn1ssXNi_FwDCDb0-3pQ",
@@ -13,5 +16,25 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+export const createUserDocument = async (user) => {
+    if (!user) return;
+
+    const userRef = doc(db,`users/${user.uid}`);
+
+    try {
+        const snapshot = await getDoc(userRef);
+
+        if (!snapshot.exists()) {
+            const { email, uid } = user;
+
+            await setDoc(userRef, { email, uid });
+        }
+    } catch (error) {
+        console.error('Error in creating user document:', error);
+    }
+}
+
 
 export default app;

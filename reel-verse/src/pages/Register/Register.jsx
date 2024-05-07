@@ -5,8 +5,11 @@ import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+// import { db } from "../../firebase/firebase";
+// import { collection, addDoc, doc} from "firebase/firestore";
 
-import styles from "./Register.module.css"
+import styles from "./Register.module.css";
+import { createUserDocument } from "../../firebase/firebase";
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -31,8 +34,9 @@ export default function Register() {
             formData.email,
             formData.password
         );
-        console.log(userCredential);
         const user = userCredential.user;
+        await createUserDocument(user);
+       
         localStorage.setItem("token", user.accessToken);
         localStorage.setItem("user", JSON.stringify(user));
 
@@ -47,7 +51,7 @@ export default function Register() {
             <Form className={styles["register-form"]} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className={styles["register-form__label"]}>
-                        {t("login.EMAIL")}
+                        {t("LOGIN.EMAIL")}
                     </Form.Label>
                     <Form.Control
                         className={styles["register-form__input"]}

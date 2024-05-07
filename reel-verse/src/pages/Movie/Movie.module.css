@@ -101,8 +101,6 @@ section.new_index div.search {
     margin-top: 15px;
     padding: var(--spacing-small) 0;
     width: var(--width-large);
-    padding: var(--spacing-small) 0;
-    width: var(--width-large);
 }
 
 section.new_index form {
@@ -121,8 +119,6 @@ section.new_index form {
     border: 0;
     border-radius: var(--border-large);
     padding: var(--spacing-small) var(--spacing-medium);
-    border-radius: var(--border-large);
-    padding: var(--spacing-small) var(--spacing-medium);
 }
 
 section.new_index form button {
@@ -136,7 +132,8 @@ section.new_index form button {
                 228, 1) 100%);
     border-radius: var(--border-large);
     position: absolute;
-    right: -1px;
+    right: 0px;
+    top:40px;
     color: var(--white);
 }
 

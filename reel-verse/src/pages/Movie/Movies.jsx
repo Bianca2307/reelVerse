@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
+import { doc, getDoc } from "firebase/firestore";
+import { db,auth } from "../../firebase/firebase";
+
 
 import PopularMovieCardComponent from "../../components/popular/PopularMovieCardComponent";
 import TrendingMovieCardComponent from "../../components/trending/TrendingMovieCardComponent";
@@ -12,7 +15,8 @@ import SearchMoviesList from "../../components/search/SearchMoviesList";
 import user from "../../assets/user.png";
 import Button from "../../components/common/Button";
 import style from "./Movie.module.css";
-import { COLORS, BACKGROUND_COLORS, THEME_COLORS } from "../../utils/theme";
+import { COLORS, BACKGROUND_COLORS} from "../../utils/theme";
+import ProfilePicture from "../Profile/ProfilePicture";
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -26,6 +30,28 @@ export default function Movies() {
     const [searchMovies, setSearchMovies] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const [profileImageUrl, setProfileImageUrl] = useState( null);
+    
+    useEffect(() => {
+        const fetchProfileImage = async () => {
+            try {
+                const userId = auth.currentUser.uid; 
+                const userRef = doc(db, "users", userId);
+                const userSnapshot = await getDoc(userRef);
+                if (userSnapshot.exists()) {
+                    const userData = userSnapshot.data();
+                    const profileImageUrl = userData.profileImageUrl;
+                    setProfileImageUrl(profileImageUrl);
+                } else {
+                    console.log("User document not found");
+                }
+            } catch (error) {
+                console.error("Error fetching user document:", error);
+            }
+        };
+
+        fetchProfileImage();
+    }, []);
 
     const genreCategories = [
         { id: 16, label: t("MOVIES.ANIMATION") },
@@ -73,6 +99,7 @@ export default function Movies() {
         setFormData((prevFormData) => ({
             ...prevFormData,
             [event.target.name]: event.target.value,
+            profileImage: prevFormData.get("profileImage"),
         }));
 
         setActiveCategory("search");
@@ -110,7 +137,10 @@ export default function Movies() {
                                     <h3>{t("MOVIES.EXPLORE")}</h3>
                                 </div>
                                 <div className={style["search"]}>
-                                    <form className={style["search-movies"]} onSubmit={handleSubmit}>
+                                    <form
+                                        className={style["search-movies"]}
+                                        onSubmit={handleSubmit}
+                                    >
                                         <input
                                             className={
                                                 style["search-movies__input"]
@@ -119,11 +149,11 @@ export default function Movies() {
                                             placeholder="Search"
                                             name="query"
                                             value={searchQuery}
-                                            onChange={(event) => handleChange(event)}
+                                            onChange={(event) =>
+                                                handleChange(event)
+                                            }
                                         />
-                                        <button
-                                            type="submit"
-                                        >
+                                        <button type="submit">
                                             {t("MOVIES.SEARCH")}
                                         </button>
                                     </form>
@@ -135,6 +165,7 @@ export default function Movies() {
 
                 <div className={style["filter-container"]}>
                     <Button
+                        theme="light"
                         type="text"
                         onClick={() => {
                             handleGenreClick(28);
@@ -143,7 +174,7 @@ export default function Movies() {
                             backgroundColor:
                                 activeGenre === 28
                                     ? BACKGROUND_COLORS.WHITE
-                                    : THEME_COLORS.LIGHT,
+                                    : BACKGROUND_COLORS.LIGHT_BACKGROUND,
                             color:
                                 activeGenre === 28
                                     ? COLORS.BLACK
@@ -162,11 +193,11 @@ export default function Movies() {
                             backgroundColor:
                                 activeGenre === 12
                                     ? BACKGROUND_COLORS.WHITE
-                                    : THEME_COLORS.LIGHT,
+                                    : BACKGROUND_COLORS.LIGHT_BACKGROUND,
                             color:
                                 activeGenre === 12
-                                    ? BACKGROUND_COLORS.BLACK
-                                    : BACKGROUND_COLORS.WHITE,
+                                    ? COLORS.BLACK
+                                    : COLORS.WHITE,
                         }}
                     >
                         {t("MOVIES.ADVENTURE")}
@@ -186,7 +217,7 @@ export default function Movies() {
                                         backgroundColor:
                                             activeGenre === category.id
                                                 ? BACKGROUND_COLORS.WHITE
-                                                : THEME_COLORS.LIGHT,
+                                                : BACKGROUND_COLORS.LIGHT_BACKGROUND,
                                         color:
                                             activeGenre === category.id
                                                 ? COLORS.BLACK
@@ -340,7 +371,9 @@ export default function Movies() {
                     </svg>
                     <div className={style["user-account"]}>
                         <Link to="/profile">
-                            <img src={user} />
+                            <ProfilePicture
+                                imageUrl={profileImageUrl || user}
+                            />
                         </Link>
                     </div>
                 </div>

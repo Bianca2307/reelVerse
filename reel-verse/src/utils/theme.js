@@ -3,6 +3,7 @@ export const BACKGROUND_COLORS = {
     PRIMARY_BACKGROUND: '#0d6efd',
     LIGHT_BACKGROUND: '#1a2237',
     TRANSPARENT_BACKGROUND: "transparent",
+    BLUE_BACKGROUND: "#007bff",
     GRAY_BACKGROUND: "#f8f9fa",
     WHITE:"#fff"
 }
@@ -36,10 +37,11 @@ export const SIZE_VALUE = {
 }
 
 export const THEME_COLORS = {
-    LIGHT:BACKGROUND_COLORS.LIGHT_BACKGROUND,
-    TRANSPARENT: BACKGROUND_COLORS.TRANSPARENT,
-    DARK:BACKGROUND_COLORS.DARK_BACKGROUND,
-    PRIMARY: BACKGROUND_COLORS.PRIMARY_BACKGROUND
+    LIGHT:"light",
+    TRANSPARENT: "transparent",
+    DARK:"dark",
+    PRIMARY: "primary",
+    BLUE:"blue"
 };
 
 export const ICON_POSITION = Object.freeze({

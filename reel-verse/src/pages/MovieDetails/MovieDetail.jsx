@@ -31,38 +31,44 @@ export default function MovieDetail() {
             })
             .catch((error) => {
                 console.error("Error fetching data:", error);
-                // Handle errors
             });
     }, []);
 
     return (
-        <div className={styles["details-container"]}>
-            {videoKey && (
-                <iframe
-                    className={styles["details-container__trailer"]}
-                    title="movie-video"
-                    width="70%"
-                    height="500"
-                    src={`https://www.youtube.com/embed/${videoKey}`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
-            )}
-            <div className={styles["details-container__overview"]}>
-                {movieDetail.overview}
+        <div>
+            {/* <Link to=".." relative="path" className={styles["back-button"]}>
+                &larr; <span>Back to movies</span>
+            </Link> */}
+            <div className={styles["details-container"]}>
+                {videoKey && (
+                    <iframe
+                        className={styles["details-container__trailer"]}
+                        title="movie-video"
+                        width="70%"
+                        height="500"
+                        src={`https://www.youtube.com/embed/${videoKey}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                )}
+                <div className={styles["details-container__overview"]}>
+                    {movieDetail.overview}
+                </div>
+                <h2 className={styles["related-title"]}>Related</h2>
+                <Container className={styles["recommended-container"]}>
+                    <Row>
+                        {recommendations.slice(0, 6).map((movie) => (
+                            <img
+                                src={`${BASE_IMAGE_URL}${movie.poster_path}`}
+                                key={movie.id}
+                                className={
+                                    styles["recommended-container__card"]
+                                }
+                            />
+                        ))}
+                    </Row>
+                </Container>
             </div>
-            <h2 className={styles["related-title"]}>Related</h2>
-            <Container className={styles["recommended-container"]}>
-                <Row>
-                    {recommendations.slice(0, 7).map((movie) => (
-                        <img
-                            src={`${BASE_IMAGE_URL}${movie.poster_path}`}
-                            key={movie.id}
-                            className={styles["recommended-container__card"]}
-                        />
-                    ))}
-                </Row>
-            </Container>
         </div>
     );
 }
