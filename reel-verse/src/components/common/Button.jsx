@@ -51,13 +51,17 @@ const ButtonComponent = styled.button`
                         ? BACKGROUND_COLORS.DARK_BACKGROUND
                         : props.theme === THEME_COLORS.WHITE
                             ? BACKGROUND_COLORS.WHITE
-                            : BACKGROUND_COLORS.GRAY_BACKGROUND};
+                            : props.theme === THEME_COLORS.BLUE
+                                ? BACKGROUND_COLORS.BLUE_BACKGROUND
+                                : BACKGROUND_COLORS.GRAY_BACKGROUND};
     color: ${(props) =>
         props.type === BUTTON_TYPE.ICON
             ? COLORS.LIGHT_GRAY
             : props.theme === THEME_COLORS.LIGHT
                 ? COLORS.WHITE
-                : COLORS.BLACK};
+                : props.theme === THEME_COLORS.BLUE
+                    ? COLORS.WHITE
+                    : COLORS.BLACK};
 `;
 const Icon = styled.span`
     display: flex;
@@ -109,13 +113,14 @@ export default function Button({
 }
 
 Button.propTypes = {
-    type: PropTypes.oneOf(["button", "icon", "iconAndText", "text"]),
+    type: PropTypes.oneOf(["button", "icon", "iconAndText", "text"]).isRequired,
     theme: PropTypes.oneOf([
         "light",
         "transparent",
         "dark",
         "primary",
         "white",
+        "blue",
     ]),
     size: PropTypes.oneOf(["sm", "md", "lg"]),
     className: PropTypes.string,

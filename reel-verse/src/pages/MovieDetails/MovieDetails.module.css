@@ -35,3 +35,14 @@
 .recommended-container__card {
     width: 200px;
 }
+
+/* .back-button {
+    display: block;
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 26px;
+}
+
+.back-button span:hover {
+    text-decoration: underline;
+} */
