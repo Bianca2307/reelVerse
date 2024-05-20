@@ -53,7 +53,9 @@ const ButtonComponent = styled.button`
                             ? BACKGROUND_COLORS.WHITE
                             : props.theme === THEME_COLORS.BLUE
                                 ? BACKGROUND_COLORS.BLUE_BACKGROUND
-                                : BACKGROUND_COLORS.GRAY_BACKGROUND};
+                                : props.theme === THEME_COLORS.DANGER
+                                    ? BACKGROUND_COLORS.DANGER
+                                    : BACKGROUND_COLORS.GRAY_BACKGROUND};
     color: ${(props) =>
         props.type === BUTTON_TYPE.ICON
             ? COLORS.LIGHT_GRAY
@@ -61,7 +63,9 @@ const ButtonComponent = styled.button`
                 ? COLORS.WHITE
                 : props.theme === THEME_COLORS.BLUE
                     ? COLORS.WHITE
-                    : COLORS.BLACK};
+                    : props.theme === THEME_COLORS.DANGER
+                        ? COLORS.WHITE
+                        : COLORS.BLACK};
 `;
 const Icon = styled.span`
     display: flex;

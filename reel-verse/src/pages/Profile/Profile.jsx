@@ -11,6 +11,7 @@ import {
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 import Button from "../../components/common/Button";
 import user from "../../assets/user.png";
@@ -19,6 +20,7 @@ import { COLORS } from "../../utils/theme";
 import getCroppedImg from "./getCroppedImage";
 import { db, auth } from "../../firebase/firebase";
 import ProfilePicture from "./ProfilePicture";
+import { handleAuthStateChange } from "../../api/useFetchMovies";
 
 export default function Profile() {
     const { t } = useTranslation();
@@ -47,14 +49,18 @@ export default function Profile() {
                         }
                     })
                     .catch((error) => {
-                        console.error("Error fetching user document:", error);
+                        alert(`Error fetching user document: ${error.message}`)
                     });
             } else {
                 console.log("User not logged in");
             }
         };
 
-        const unsubscribe = auth.onAuthStateChanged(fetchProfileImage);
+        const unsubscribe = handleAuthStateChange(
+            (user) => {
+                fetchProfileImage(user)
+            }
+        )
         return () => unsubscribe();
     }, []);
 
@@ -100,7 +106,7 @@ export default function Profile() {
                 console.log("User document not found");
             }
         } catch (error) {
-            console.error("Error updating user document:", error);
+            alert(`Error updating user document:${error.message}`);
         }
     };
 
@@ -120,7 +126,7 @@ export default function Profile() {
             navigate( `/movies?profileImage=${encodeURIComponent(profileImageUrl)}`);
             setShowModal(false);
         } catch (error) {
-            console.error("Error cropping image:", error);
+            alert(`Error cropping image: ${error.message}`)
         }
     };
 
@@ -149,16 +155,20 @@ export default function Profile() {
             />
             <div className={styles["profile-container__icons"]}>
                 <div>
-                    <Button
-                        size="sm"
-                        style={{
-                            height: 65,
-                            marginRight: 30,
-                            backgroundColor: COLORS.WHITE,
-                        }}
-                        type="icon"
-                        icon={<BiBookmarkHeart className={styles["icon"]} />}
-                    ></Button>
+                    <Link to="/favorite">
+                        <Button
+                            size="sm"
+                            style={{
+                                height: 65,
+                                marginRight: 30,
+                                backgroundColor: COLORS.WHITE,
+                            }}
+                            type="icon"
+                            icon={
+                                <BiBookmarkHeart className={styles["icon"]} />
+                            }
+                        ></Button>
+                    </Link>
                     <Button
                         size="sm"
                         style={{ height: 65, backgroundColor: COLORS.WHITE }}

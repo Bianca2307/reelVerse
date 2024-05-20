@@ -33,6 +33,11 @@ export default function Header() {
                 >
                     {t("HEADER.MOVIES")}
                 </NavLink>
+                <NavLink 
+                    to="/favorite"
+                    className={({ isActive }) => isActive ? styles["active-link"] : null} >
+                    {t("HEADER.FAVORITES")}
+                </NavLink>
                 <NavLink
                     to="/"
                     className={({ isActive }) =>

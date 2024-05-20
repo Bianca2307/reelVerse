@@ -31,7 +31,8 @@
     "HEADER": {
         "MOVIES": "Movies",
         "LOG_OUT": "Log out",
-        "TITLE":"reelVerse"
+        "TITLE":"reelVerse",
+        "FAVORITES":"Favorites"
     },
 
     "REGISTER": {
@@ -51,5 +52,8 @@
     "PROFILE": {
         "LOADING":"Loading...",
         "UPLOAD":"Upload"
+    },
+    "FAVORITE": {
+        "TITLE":"FAVORITE MOVIES"
     }
 }

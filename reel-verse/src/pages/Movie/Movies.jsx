@@ -17,6 +17,7 @@ import Button from "../../components/common/Button";
 import style from "./Movie.module.css";
 import { COLORS, BACKGROUND_COLORS} from "../../utils/theme";
 import ProfilePicture from "../Profile/ProfilePicture";
+import { handleAuthStateChange } from "../../api/useFetchMovies";
 
 export default function Movies() {
     const [activeCategory, setActiveCategory] = useState("");
@@ -33,24 +34,33 @@ export default function Movies() {
     const [profileImageUrl, setProfileImageUrl] = useState( null);
     
     useEffect(() => {
-        const fetchProfileImage = async () => {
-            try {
-                const userId = auth.currentUser.uid; 
-                const userRef = doc(db, "users", userId);
-                const userSnapshot = await getDoc(userRef);
-                if (userSnapshot.exists()) {
-                    const userData = userSnapshot.data();
-                    const profileImageUrl = userData.profileImageUrl;
-                    setProfileImageUrl(profileImageUrl);
-                } else {
-                    console.log("User document not found");
+        const fetchProfileImage = async (user) => {
+            if (user) {
+                try {
+                    const userId = auth.currentUser.uid;
+                    const userRef = doc(db, "users", userId);
+                    const userSnapshot = await getDoc(userRef);
+                    if (userSnapshot.exists()) {
+                        const userData = userSnapshot.data();
+                        const profileImageUrl = userData.profileImageUrl;
+                        setProfileImageUrl(profileImageUrl);
+                    } else {
+                        console.log("User document not found");
+                    }
+                } catch (error) {
+                    alert(`Error fetching user document: ${error.message}`)
                 }
-            } catch (error) {
-                console.error("Error fetching user document:", error);
+            } else {
+                console.log("User not logged in");
             }
         };
 
-        fetchProfileImage();
+        const unsubscrie = handleAuthStateChange(
+            async (user) => {
+                await fetchProfileImage(user);
+            }
+        )
+        return () => unsubscrie()
     }, []);
 
     const genreCategories = [

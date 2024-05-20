@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register"
 import Protected from "./components/common/Protected";
 import Layout from "./components/common/Layout";
 import Profile from "./pages/Profile/Profile";
+import FavoriteList from "./components/common/Favorite/FavoriteList";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                         <Route path="/movies" element={<Movies />} />
                         <Route path="/movies/:id" element={<MovieDetail />} />
                         <Route path="/profile" element={<Profile />} />
+                        <Route path="/favorite" element={<FavoriteList />} />
                     </Route>
                 </Route>
             </Routes>

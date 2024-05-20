@@ -36,6 +36,9 @@
     width: 200px;
 }
 
+.favorite-icon{
+    font-size:30px;
+}
 /* .back-button {
     display: block;
     color: var(--white);

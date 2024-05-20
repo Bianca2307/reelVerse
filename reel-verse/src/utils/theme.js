@@ -5,7 +5,8 @@ export const BACKGROUND_COLORS = {
     TRANSPARENT_BACKGROUND: "transparent",
     BLUE_BACKGROUND: "#007bff",
     GRAY_BACKGROUND: "#f8f9fa",
-    WHITE:"#fff"
+    WHITE: "#fff",
+    DANGER: "#c60a0a"
 }
 
 export const COLORS = {
@@ -41,7 +42,8 @@ export const THEME_COLORS = {
     TRANSPARENT: "transparent",
     DARK:"dark",
     PRIMARY: "primary",
-    BLUE:"blue"
+    BLUE: "blue",
+    DANGER:"danger"
 };
 
 export const ICON_POSITION = Object.freeze({
