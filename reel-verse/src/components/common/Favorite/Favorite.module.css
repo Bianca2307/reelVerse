@@ -1,0 +1,39 @@
+:root {
+    --spacing-medium: 20px;
+    --spacing--large: 25px;
+    --white: #ffffff;
+}
+
+.favorite-container__title {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    padding: var(--spacing-small) 5px;
+    color: var(--white);
+}
+
+.favorite-container {
+    padding: var(--spacing--large) var(--spacing-medium);
+}
+
+.favorite-list-container {
+    grid-gap: 1rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 250px));
+    justify-content: center;
+}
+
+.favorite-list-container a {
+    text-decoration: none;
+}
+
+.delete-button {
+    width:100%;
+    border-radius: 0px !important;
+}
+
+.card {
+    border: none;
+    max-width: 20vw;
+    height: auto;
+}
