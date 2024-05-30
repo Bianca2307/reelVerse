@@ -51,7 +51,8 @@
 
     "PROFILE": {
         "LOADING":"Loading...",
-        "UPLOAD":"Upload"
+        "UPLOAD":"Upload",
+        "CANCEL":"Cancel"
     },
     "FAVORITE": {
         "TITLE":"FAVORITE MOVIES"

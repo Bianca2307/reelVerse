@@ -1,0 +1,64 @@
+.modal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    border-radius: 10px;
+    background-color: white;
+    padding: 1rem;
+    width: 500px;
+    background: radial-gradient(circle at -4% -12.9%, rgb(74, 98, 110) 0.3%, rgb(30, 33, 48) 90.2%);
+}
+
+.close {
+    cursor: pointer;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 2rem;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.crop-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: radial-gradient(circle at -4% -12.9%, rgb(103 149 171) 0.3%, rgb(57 60 72) 90.2%);
+}
+
+.btn {
+    cursor: pointer;
+    box-shadow: 0px 5px 5px rgb(30, 20, 48);
+    border-radius: 5px !important;
+    width: 150px;
+}
+
+#btn-cancel {
+    background-color: #1D1D1D;
+    color: white;
+    border: 1px solid #333;
+}
+
+.modal-footer {
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+}

@@ -40,14 +40,15 @@ input::file-selector-button:hover {
 }
 
 .modal {
-   width: 100%;
-   height: 130px;
+   width: 100% !important;
+   height: 130px !important;
 }
 
-.modal__content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
+.crop-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: #333;
 }
 
 .controls button {

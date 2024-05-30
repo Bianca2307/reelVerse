@@ -1,5 +1,5 @@
 import { BiBookmarkHeart, BiPlusCircle } from "react-icons/bi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import ReactCrop from "react-easy-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import {
@@ -9,7 +9,6 @@ import {
     getDownloadURL,
 } from "firebase/storage";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -21,15 +20,39 @@ import getCroppedImg from "./getCroppedImage";
 import { db, auth } from "../../firebase/firebase";
 import ProfilePicture from "./ProfilePicture";
 import { handleAuthStateChange } from "../../api/useFetchMovies";
+import Modal from "../../components/common/Modal/Modal";
+
+const actions = {
+    setCrop: 'SET_CROP',
+    setZoom: 'SET_ZOOM',
+    setCroppedAreaPixels: 'SET_CROP_AREA_PIXELS',
+    setShowModalTrue: 'SET_SHOW_MODAL_TRUE',
+    setShowModalFalse: 'SET_SHOW_MODAL_FALSE'
+}
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case actions.setCrop:
+            return {...state,crop: action.payload}
+        case actions.setZoom:
+            return {...state,zoom: action.payload }
+        case actions.setCroppedAreaPixels:
+            return { ...state, croppedAreaPixels: action.payload }
+        case actions.setShowModalTrue:
+            return { ...state, showModal: true }
+        case actions.setShowModalFalse:
+            return {...state, showModal:false}
+        default:
+            return state;
+    }
+}
 
 export default function Profile() {
-    const { t } = useTranslation();
     const [selectedImage, setSelectedImage] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [crop, setCrop] = useState({ x: 0, y: 0 });
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-    const [zoom, setZoom] = useState(1);
     const [croppedImageUrl, setCroppedImageUrl] = useState(null);
+    const initialState = {crop:{x:0, y:0}, zoom:1, croppedAreaPixels: null, showModal:false}
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const {crop,zoom, croppedAreaPixels, showModal} = state
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -48,21 +71,39 @@ export default function Profile() {
                             console.log("User document not found");
                         }
                     })
-                    .catch((error) => {
-                        alert(`Error fetching user document: ${error.message}`)
+                    .catch(() => {
+                        alert('Error fetching profile image');
                     });
             } else {
                 console.log("User not logged in");
             }
         };
 
-        const unsubscribe = handleAuthStateChange(
-            (user) => {
-                fetchProfileImage(user)
-            }
-        )
+        const unsubscribe = handleAuthStateChange((user) => {
+            fetchProfileImage(user);
+        });
         return () => unsubscribe();
     }, []);
+
+    const handleCropChange = (crop) => {
+        dispatch({type:actions.setCrop, payload:crop})
+    }
+
+    const handleZoomChange = (zoom) => {
+        dispatch({type:actions.setZoom, payload:zoom})
+    }
+
+    const onCropComplete = (croppedArea, croppedAreaPixels) => {
+        dispatch({type:actions.setCroppedAreaPixels, payload:croppedAreaPixels})
+    };
+    
+    const handleModalClose = () => {
+        dispatch({type:actions.setShowModalFalse, payload:showModal})
+    }
+
+    const handleModalOpen = () => {
+        dispatch({type:actions.setShowModalTrue, payload:showModal})
+    }
 
     function handleChange(e) {
         const file = e.target.files[0];
@@ -71,7 +112,7 @@ export default function Profile() {
             reader.onload = () => {
                 const base64Image = reader.result;
                 setSelectedImage(base64Image);
-                setShowModal(true);
+                handleModalOpen()
             };
             reader.readAsDataURL(file);
         }
@@ -89,7 +130,7 @@ export default function Profile() {
         const downloadURL = await getDownloadURL(storageRef);
         setLoading(false);
         alert("Uploaded file!");
-        setShowModal(false);
+        handleModalClose();
         return downloadURL;
     };
 
@@ -106,7 +147,7 @@ export default function Profile() {
                 console.log("User document not found");
             }
         } catch (error) {
-            alert(`Error updating user document:${error.message}`);
+            alert('Error saving image in firestore');
         }
     };
 
@@ -123,23 +164,13 @@ export default function Profile() {
                 setLoading
             );
             await saveProfileImageToFirestore(userId, profileImageUrl);
-            navigate( `/movies?profileImage=${encodeURIComponent(profileImageUrl)}`);
-            setShowModal(false);
+            navigate(
+                `/movies?profileImage=${encodeURIComponent(profileImageUrl)}`
+            );
+            handleModalClose();
         } catch (error) {
-            alert(`Error cropping image: ${error.message}`)
+            alert(`Error cropping image`);
         }
-    };
-
-    const onCropComplete = (croppedArea, croppedAreaPixels) => {
-        setCroppedAreaPixels(croppedAreaPixels);
-    };
-
-    const handleCropChange = (crop) => {
-        setCrop(crop);
-    };
-
-    const handleZoomChange = (zoom) => {
-        setZoom(zoom);
     };
 
     return (
@@ -179,33 +210,17 @@ export default function Profile() {
             </div>
 
             {showModal && (
-                <div>
-                    <div className={styles["modal"]}>
-                        <ReactCrop
-                            image={selectedImage}
-                            crop={crop}
-                            zoom={zoom}
-                            aspect={1}
-                            onCropChange={handleCropChange}
-                            onZoomChange={handleZoomChange}
-                            onCropComplete={onCropComplete}
-                        />
-                    </div>
-                    <div className={styles["controls"]}>
-                        <Button
-                            type="text"
-                            theme="blue"
-                            onClick={handleUpload}
-                            disabled={loading}
-                        >
-                            {loading ? (
-                                <span>{t("PROFILE.LOADING")}</span>
-                            ) : (
-                                <span>{t("PROFILE.UPLOAD")}</span>
-                            )}
-                        </Button>
-                    </div>
-                </div>
+                <Modal loading={loading} handleUpload={handleUpload} onClose={handleModalClose}>
+                    <ReactCrop
+                        image={selectedImage}
+                        crop={crop}
+                        zoom={zoom}
+                        aspect={1}
+                        onCropChange={handleCropChange}
+                        onZoomChange={handleZoomChange}
+                        onCropComplete={onCropComplete}
+                    />
+                </Modal>
             )}
         </div>
     );
