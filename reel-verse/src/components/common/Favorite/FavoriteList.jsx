@@ -30,7 +30,7 @@ export default function FavoriteList() {
                 );
                 setFavoriteMovies(movieDetails);
             } catch (error) {
-                alert(`Error fetching favorite movies: ${error.message}`);
+                alert('Error displaying favorite movies');
             }
         } else {
             console.log("User not logged in");
@@ -59,7 +59,7 @@ export default function FavoriteList() {
             }
             fetchFavoriteMovies();
         } catch (error) {
-            alert(`Error deleting movie: ${error.message}`);
+            alert('Error deleting movie');
         }
     };
     return (

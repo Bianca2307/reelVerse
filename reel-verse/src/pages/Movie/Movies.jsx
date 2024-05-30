@@ -1,10 +1,9 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { API_KEY, TMDB_API_BASE_URL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import { doc, getDoc } from "firebase/firestore";
-import { db,auth } from "../../firebase/firebase";
-
+import { db, auth } from "../../firebase/firebase";
 
 import PopularMovieCardComponent from "../../components/popular/PopularMovieCardComponent";
 import TrendingMovieCardComponent from "../../components/trending/TrendingMovieCardComponent";
@@ -15,7 +14,7 @@ import SearchMoviesList from "../../components/search/SearchMoviesList";
 import user from "../../assets/user.png";
 import Button from "../../components/common/Button";
 import style from "./Movie.module.css";
-import { COLORS, BACKGROUND_COLORS} from "../../utils/theme";
+import { COLORS, BACKGROUND_COLORS } from "../../utils/theme";
 import ProfilePicture from "../Profile/ProfilePicture";
 import { handleAuthStateChange } from "../../api/useFetchMovies";
 
@@ -31,8 +30,8 @@ export default function Movies() {
     const [searchMovies, setSearchMovies] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const [profileImageUrl, setProfileImageUrl] = useState( null);
-    
+    const [profileImageUrl, setProfileImageUrl] = useState(null);
+
     useEffect(() => {
         const fetchProfileImage = async (user) => {
             if (user) {
@@ -48,19 +47,17 @@ export default function Movies() {
                         console.log("User document not found");
                     }
                 } catch (error) {
-                    alert(`Error fetching user document: ${error.message}`)
+                    alert(`Error fetching user document: ${error.message}`);
                 }
             } else {
                 console.log("User not logged in");
             }
         };
 
-        const unsubscrie = handleAuthStateChange(
-            async (user) => {
-                await fetchProfileImage(user);
-            }
-        )
-        return () => unsubscrie()
+        const unsubscrie = handleAuthStateChange(async (user) => {
+            await fetchProfileImage(user);
+        });
+        return () => unsubscrie();
     }, []);
 
     const genreCategories = [
@@ -123,7 +120,6 @@ export default function Movies() {
         );
         const data = await res.json();
         setSearchMovies(data.results);
-        
     }
 
     function handleSubmit(e) {
