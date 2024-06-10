@@ -125,6 +125,7 @@ Button.propTypes = {
         "primary",
         "white",
         "blue",
+        "danger"
     ]),
     size: PropTypes.oneOf(["sm", "md", "lg"]),
     className: PropTypes.string,

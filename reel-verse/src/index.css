@@ -1,33 +1,6 @@
 body {
-     background-color: #10141e;
+    background: #121829;
+    background-image: url(assets/bg.1c9b34b.png);
+    background-repeat: repeat-y;
+    background-position: 50% -160px;
 }
-/* .scroller {
-    width: 100%;
-    max-width: 1400px;
-    min-height: 355px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    transition: height .5s linear;
-}
-
-
-.scroller::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-
-}
-
-.scroller::-webkit-scrollbar-thumb {
-    background-color: #c2bfbf;
-    border-radius: 5px;
-
-}
-
-.scroller::-webkit-scrollbar-thumb:hover {
-    background-color: #bbb9b9;
-
-} */
-
-
-
-

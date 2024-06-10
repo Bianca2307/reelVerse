@@ -14,20 +14,29 @@
     color: var(--white);
 }
 
-.register-form {
-    margin-left: 500px;
-}
 
 .register-form__input {
-    width: 50% !important;
+   display: inline !important;
 }
 
-#formBasicEmail,
-#formBasicPassword {
-    width: 50%;
-    height: 50px;
+.register-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-button {
-    width: 50%;
+    width: 100%;
+}
+
+@media (max-width:320px) {
+    .register-container {
+        padding: 10px 5px;
+    }
+
+
+    .register-form__input {
+        margin-left: 0px;
+    }
 }

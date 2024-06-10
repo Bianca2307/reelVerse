@@ -43,57 +43,61 @@ export default function Login() {
 
     return (
         <>
-            <h2 className={styles["login-title"]}>{t("LOGIN.WELCOME_BACK")}</h2>
-            <Form className={styles["login-form"]} onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label className={styles["login-form__label"]}>
-                        {t("LOGIN.EMAIL")}
-                    </Form.Label>
-                    <Form.Control
-                        className={styles["login-form__input"]}
-                        type="email"
-                        placeholder="Enter email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {t("LOGIN.VALID_EMAIL")}
-                    </Form.Control.Feedback>
-                </Form.Group>
+            <div className={styles["login-container"]}>
+                <h2 className={styles["login-title"]}>
+                    {t("LOGIN.WELCOME_BACK")}
+                </h2>
+                <Form className={styles["login-form"]} onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label className={styles["login-form__label"]}>
+                            {t("LOGIN.EMAIL")}
+                        </Form.Label>
+                        <Form.Control 
+                            className={styles["login-form__input"]}
+                            type="email"
+                            placeholder="Enter email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {t("LOGIN.VALID_EMAIL")}
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className={styles["login-form__label"]}>
-                        {t("LOGIN.PASSWORD")}
-                    </Form.Label>
-                    <Form.Control
-                        className={styles["login-form__input"]}
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group>
-                <div className={styles["authentication-methods-container"]}>
-                    <Button
-                        variant="primary"
-                        type="submit"
-                        className={styles["sign-button"]}
-                    >
-                        {t("LOGIN.SIGN_IN")}
-                    </Button>
-                    <Form.Text
-                        className={styles["text-muted"]}
-                        id={styles["sign-up-text"]}
-                    >
-                        {t("LOGIN.DONT_HAVE_ACCOUNT")}
-                        <Link to="/register">{t("signUp")}</Link>
-                    </Form.Text>
-                </div>
-            </Form>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label className={styles["login-form__label"]}>
+                            {t("LOGIN.PASSWORD")}
+                        </Form.Label>
+                        <Form.Control
+                            className={styles["login-form__input"]}
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Form.Group>
+                    <div className={styles["authentication-methods-container"]}>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className={styles["sign-button"]}
+                        >
+                            {t("LOGIN.SIGN_IN")}
+                        </Button>
+                        <Form.Text
+                            className={styles["text-muted"]}
+                            id={styles["sign-up-text"]}
+                        >
+                            {t("LOGIN.DONT_HAVE_ACCOUNT")}
+                            <Link to="/register">{t("signUp")}</Link>
+                        </Form.Text>
+                    </div>
+                </Form>
+            </div>
         </>
     );
 }

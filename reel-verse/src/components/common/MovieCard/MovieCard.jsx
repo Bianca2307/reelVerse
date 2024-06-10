@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Card from "react-bootstrap/Card";
+
 
 import ProgressCircle from "../ProgressCircle/ProgressCircle";
 import styles from "./MovieCard.module.css";
@@ -12,19 +12,22 @@ export default function MovieCard(props) {
     const percentage = (voteAverage / maxVote) * 100;
 
     return (
-        <Card className={`${styles["shadow"]} ${styles["card"]}`}>
-            <Card.Img variant="top" src={`${BASE_IMAGE_URL}${props.image}`} />
-            <Card.Body>
+        <div className={`${styles["card-wrapper"]}`}>
+            <div className={styles["card-content"]}>
+                <img className={`${styles["card-image"]} ${styles["image"]}`}
+                    src={`${BASE_IMAGE_URL}${props.image}`}
+                />
+                <div className={styles["card-info"]}>
                     <ProgressCircle
                         percent={percentage}
                         trackColor={percentage > 70 ? "#204529" : "#423d0f"}
                         barColor={percentage > 70 ? "#21d07a" : "#d2d531"}
                     />
-                <Card.Title className={styles["card-title"]}>
-                    {props.title}
-                </Card.Title>
-                <Card.Text> </Card.Text>
-            </Card.Body>
-        </Card>
+                    <div className={styles["card-title"]}>
+                        {props.title}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

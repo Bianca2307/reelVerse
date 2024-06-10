@@ -43,48 +43,53 @@ export default function Register() {
 
     return (
         <>
-            <h2 className={styles["register-title"]}>
-                {t("REGISTER.REGISTER")}
-            </h2>
-            <Form className={styles["register-form"]} onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label className={styles["register-form__label"]}>
-                        {t("LOGIN.EMAIL")}
-                    </Form.Label>
-                    <Form.Control
-                        className={styles["register-form__input"]}
-                        type="email"
-                        placeholder="Enter email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className={styles["register-form__label"]}>
-                        {t("LOGIN.PASSWORD")}
-                    </Form.Label>
-                    <Form.Control
-                        className={styles["register-form__input"]}
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group>
-
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className={styles["sign-button"]}
+            <div className={styles["register-container"]}>
+                <h2 className={styles["register-title"]}>
+                    {t("REGISTER.REGISTER")}
+                </h2>
+                <Form
+                    className={styles["register-form"]}
+                    onSubmit={handleSubmit}
                 >
-                    {t("REGISTER.SIGN_UP")}
-                </Button>
-            </Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label className={styles["register-form__label"]}>
+                            {t("LOGIN.EMAIL")}
+                        </Form.Label>
+                        <Form.Control
+                            className={styles["register-form__input"]}
+                            type="email"
+                            placeholder="Enter email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label className={styles["register-form__label"]}>
+                            {t("LOGIN.PASSWORD")}
+                        </Form.Label>
+                        <Form.Control
+                            className={styles["register-form__input"]}
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Form.Group>
+
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        className={styles["sign-button"]}
+                    >
+                        {t("REGISTER.SIGN_UP")}
+                    </Button>
+                </Form>
+            </div>
         </>
     );
 }
