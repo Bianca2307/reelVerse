@@ -4,6 +4,7 @@
     --black: black;
     --white: #ffffff;
     --light-black: #171e31;
+    --dark-black: rgba(18, 24, 41, 0.98);
     --light-gray: #546487;
     --spacing-small: 10px;
     --spacing-medium: 20px;
@@ -12,7 +13,6 @@
     --border-small: 15px;
     --border-medium: 25px;
     --border-large: 30px;
-
 }
 
 .movies-container {
@@ -133,7 +133,7 @@ section.new_index form button {
     border-radius: var(--border-large);
     position: absolute;
     right: 0px;
-    top:40px;
+    top: 20px;
     color: var(--white);
 }
 
@@ -153,21 +153,21 @@ section.new_index form button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-top:15px;
-    margin:20px 0px;
+    margin-top: 15px;
+    margin: 20px 0px;
 }
-.filter-container > button {
-    margin-right:3px;
+
+.filter-container>button {
+    margin-right: 3px;
 }
 
 .panel {
-    background-color: var(--light-black);
+    background-color: var(--dark-black);
     border-radius: var(--border-small);
-    height: 342px;
     justify-content: space-between;
-    padding: 15px 0;
-    position: fixed;
-    top: 120px;
+    padding: 15px 5px;
+    position: absolute;
+    top: 82px;
     width: 55px;
 }
 
@@ -181,6 +181,7 @@ section.new_index form button:hover {
     color: var(--light-gray);
     cursor: pointer;
     font-size: 26px;
+    margin-bottom: 5px;
 }
 
 .user-account {
@@ -188,6 +189,127 @@ section.new_index form button:hover {
 }
 
 .user-account img {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
+}
+
+@media (min-width:768px) and (max-width:1024px) {
+    div.media.discover div.content_wrapper>div.title h2 {
+        font-size: 2em;
+        padding: 0px 20px;
+    }
+
+    section.new_index h3 {
+        font-size: 1.5em;
+        padding: 0px 20px;
+    }
+
+    section.new_index form button {
+        top: 20px;
+    }
+}
+
+@media (min-width: 576px) and (max-width:768px) {
+    div.media.discover div.content_wrapper>div.title h2 {
+        font-size: 2em;
+        padding: 0px 20px;
+    }
+
+    section.new_index h3 {
+        font-size: 1.5em;
+        padding: 0px 20px;
+    }
+
+    .search-movies {
+        width: 75vw;
+    }
+
+    .search-movies__input {
+        height: 35px;
+        margin-left: 5px;
+    }
+
+    section.new_index form button {
+        height: 35px;
+        padding: 0px 15px;
+        margin-right: -5px;
+        top: 20px;
+    }
+
+    div.column_wrapper div.content_wrapper {
+        padding: 0;
+    }
+
+}
+
+@media (min-width:320px) and (max-width:576px) {
+    div.media.discover div.content_wrapper>div.title h2 {
+        font-size: 1.5em;
+        padding: 0px 5px;
+    }
+
+    section.new_index h3 {
+        font-size: 1.2em;
+        padding: 0px 5px;
+    }
+
+    .search-movies {
+        width: 60vw;
+    }
+
+    .search-movies__input {
+        height: 30px;
+        margin-left: 5px;
+    }
+
+    section.new_index form button {
+        height: 30px;
+        padding: 0px 15px;
+        margin-right: -5px;
+        top: 20px;
+    }
+
+    div.column_wrapper div.content_wrapper {
+        padding: 0;
+    }
+
+    .filter-container {
+        display: grid;
+    }
+}
+
+@media (max-width: 320px) {
+    div.media.discover div.content_wrapper>div.title h2 {
+        font-size: 1.5em;
+        padding: 0px 5px;
+    }
+
+    section.new_index h3 {
+        font-size: 1.2em;
+        padding: 0px 5px;
+    }
+
+    .search-movies {
+        width: 50vw;
+    }
+
+    .search-movies__input {
+        height: 30px;
+        margin-left: 0px;
+    }
+
+    section.new_index form button {
+        height: 30px;
+        padding: 0px 15px;
+        margin-right: -31px;
+        top: 20px;
+    }
+
+    div.column_wrapper div.content_wrapper {
+        padding: 0;
+    }
+
+    .filter-container {
+        display: grid;
+    }
 }

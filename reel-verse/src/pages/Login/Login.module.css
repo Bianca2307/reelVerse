@@ -14,22 +14,15 @@
     margin-top: 100px;
 }
 
-.login-form {
-    margin-left: 500px;
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-form__label {
     color: var(--white);
-}
-
-.login-form__input {
-    width: 50% !important;
-}
-
-#formBasicEmail,
-#formBasicPassword {
-    width: 50%;
-    height: 50px;
 }
 
 #sign-up-text {
@@ -38,15 +31,30 @@
 
 }
 
-.sign-button {
-    width: 20%;
-}
-
 .authentication-methods-container {
     display: grid;
-    margin-left: 150px;
-}
+   
+} 
 
 .text-muted {
     color: var(--white) !important;
+}
+
+.login-form__input{
+    display: inline !important;
+}
+
+input {
+    margin-top:10px !important;
+}
+
+@media (max-width:320px){
+    .login-container {
+        padding: 10px 5px;
+    }
+
+
+    .login-form__input {
+        margin-left: 0px;
+    }
 }

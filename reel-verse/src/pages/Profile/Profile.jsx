@@ -10,7 +10,6 @@ import {
 } from "firebase/storage";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 
 import Button from "../../components/common/Button";
 import user from "../../assets/user.png";
@@ -21,40 +20,47 @@ import { db, auth } from "../../firebase/firebase";
 import ProfilePicture from "./ProfilePicture";
 import { handleAuthStateChange } from "../../api/useFetchMovies";
 import Modal from "../../components/common/Modal/Modal";
+import FavoriteList from "../../components/common/Favorite/FavoriteList"
 
 const actions = {
-    setCrop: 'SET_CROP',
-    setZoom: 'SET_ZOOM',
-    setCroppedAreaPixels: 'SET_CROP_AREA_PIXELS',
-    setShowModalTrue: 'SET_SHOW_MODAL_TRUE',
-    setShowModalFalse: 'SET_SHOW_MODAL_FALSE'
-}
+    setCrop: "SET_CROP",
+    setZoom: "SET_ZOOM",
+    setCroppedAreaPixels: "SET_CROP_AREA_PIXELS",
+    setShowModalTrue: "SET_SHOW_MODAL_TRUE",
+    setShowModalFalse: "SET_SHOW_MODAL_FALSE",
+};
 
 const reducer = (state, action) => {
     switch (action.type) {
         case actions.setCrop:
-            return {...state,crop: action.payload}
+            return { ...state, crop: action.payload };
         case actions.setZoom:
-            return {...state,zoom: action.payload }
+            return { ...state, zoom: action.payload };
         case actions.setCroppedAreaPixels:
-            return { ...state, croppedAreaPixels: action.payload }
+            return { ...state, croppedAreaPixels: action.payload };
         case actions.setShowModalTrue:
-            return { ...state, showModal: true }
+            return { ...state, showModal: true };
         case actions.setShowModalFalse:
-            return {...state, showModal:false}
+            return { ...state, showModal: false };
         default:
             return state;
     }
-}
+};
 
 export default function Profile() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [croppedImageUrl, setCroppedImageUrl] = useState(null);
-    const initialState = {crop:{x:0, y:0}, zoom:1, croppedAreaPixels: null, showModal:false}
-    const [state, dispatch] = useReducer(reducer, initialState)
-    const {crop,zoom, croppedAreaPixels, showModal} = state
+    const initialState = {
+        crop: { x: 0, y: 0 },
+        zoom: 1,
+        croppedAreaPixels: null,
+        showModal: false,
+    };
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const { crop, zoom, croppedAreaPixels, showModal } = state;
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [isFavoriteListVisible, setIsFavoriteListVisible] = useState(false);
 
     useEffect(() => {
         const fetchProfileImage = (user) => {
@@ -72,7 +78,7 @@ export default function Profile() {
                         }
                     })
                     .catch(() => {
-                        alert('Error fetching profile image');
+                        alert("Error fetching profile image");
                     });
             } else {
                 console.log("User not logged in");
@@ -86,24 +92,27 @@ export default function Profile() {
     }, []);
 
     const handleCropChange = (crop) => {
-        dispatch({type:actions.setCrop, payload:crop})
-    }
+        dispatch({ type: actions.setCrop, payload: crop });
+    };
 
     const handleZoomChange = (zoom) => {
-        dispatch({type:actions.setZoom, payload:zoom})
-    }
+        dispatch({ type: actions.setZoom, payload: zoom });
+    };
 
     const onCropComplete = (croppedArea, croppedAreaPixels) => {
-        dispatch({type:actions.setCroppedAreaPixels, payload:croppedAreaPixels})
+        dispatch({
+            type: actions.setCroppedAreaPixels,
+            payload: croppedAreaPixels,
+        });
     };
-    
+
     const handleModalClose = () => {
-        dispatch({type:actions.setShowModalFalse, payload:showModal})
-    }
+        dispatch({ type: actions.setShowModalFalse, payload: showModal });
+    };
 
     const handleModalOpen = () => {
-        dispatch({type:actions.setShowModalTrue, payload:showModal})
-    }
+        dispatch({ type: actions.setShowModalTrue, payload: showModal });
+    };
 
     function handleChange(e) {
         const file = e.target.files[0];
@@ -112,10 +121,14 @@ export default function Profile() {
             reader.onload = () => {
                 const base64Image = reader.result;
                 setSelectedImage(base64Image);
-                handleModalOpen()
+                handleModalOpen();
             };
             reader.readAsDataURL(file);
         }
+    }
+
+    function toggleFavoriteList() {
+        setIsFavoriteListVisible(!isFavoriteListVisible);
     }
 
     const uploadCroppedImage = async (
@@ -147,7 +160,7 @@ export default function Profile() {
                 console.log("User document not found");
             }
         } catch (error) {
-            alert('Error saving image in firestore');
+            alert("Error saving image in firestore");
         }
     };
 
@@ -175,31 +188,38 @@ export default function Profile() {
 
     return (
         <div className={styles["profile-container"]}>
-            <ProfilePicture
-                imageUrl={croppedImageUrl || selectedImage || user}
-                style={{ height: "300px", width: "350px" }}
-            />
-            <input
-                type="file"
-                accept=".png, .jpg, .jpeg"
-                onChange={handleChange}
-            />
+            <div className={styles["profile-container__url"]}>
+                <div className={styles["profile-image"]}>
+                    <ProfilePicture
+                        imageUrl={croppedImageUrl || selectedImage || user}
+                        style={{
+                            height: "300px",
+                            width: "350px",
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
+                    />
+                </div>
+
+                <input
+                    type="file"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleChange}
+                />
+            </div>
             <div className={styles["profile-container__icons"]}>
                 <div>
-                    <Link to="/favorite">
-                        <Button
-                            size="sm"
-                            style={{
-                                height: 65,
-                                marginRight: 30,
-                                backgroundColor: COLORS.WHITE,
-                            }}
-                            type="icon"
-                            icon={
-                                <BiBookmarkHeart className={styles["icon"]} />
-                            }
-                        ></Button>
-                    </Link>
+                    <Button
+                        size="sm"
+                        style={{
+                            height: 65,
+                            marginRight: 30,
+                            backgroundColor: COLORS.WHITE,
+                        }}
+                        type="icon"
+                        icon={<BiBookmarkHeart className={styles["icon"]} />}
+                        onClick={toggleFavoriteList}
+                    ></Button>
                     <Button
                         size="sm"
                         style={{ height: 65, backgroundColor: COLORS.WHITE }}
@@ -209,8 +229,18 @@ export default function Profile() {
                 </div>
             </div>
 
+            {isFavoriteListVisible && (
+                <div className={styles["favorite-list"]}>
+                    <FavoriteList />{" "}
+                </div>
+            )}
+
             {showModal && (
-                <Modal loading={loading} handleUpload={handleUpload} onClose={handleModalClose}>
+                <Modal
+                    loading={loading}
+                    handleUpload={handleUpload}
+                    onClose={handleModalClose}
+                >
                     <ReactCrop
                         image={selectedImage}
                         crop={crop}

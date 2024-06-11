@@ -1,4 +1,5 @@
-import { Avatar } from '@mui/material'
+import { Avatar } from '@mui/material';
+
 
 export default function ProfilePicture(props) {
     return (

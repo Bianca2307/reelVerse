@@ -1,7 +1,7 @@
 export const BACKGROUND_COLORS = {
     DARK_BACKGROUND: '#212529',
     PRIMARY_BACKGROUND: '#0d6efd',
-    LIGHT_BACKGROUND: '#1a2237',
+    LIGHT_BACKGROUND: ' rgba(18, 24, 41, 0.98)',
     TRANSPARENT_BACKGROUND: "transparent",
     BLUE_BACKGROUND: "#007bff",
     GRAY_BACKGROUND: "#f8f9fa",
