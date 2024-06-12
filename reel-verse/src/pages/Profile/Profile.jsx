@@ -1,4 +1,3 @@
-import { BiBookmarkHeart, BiPlusCircle } from "react-icons/bi";
 import { useState, useEffect, useReducer } from "react";
 import ReactCrop from "react-easy-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -14,13 +13,13 @@ import { useNavigate } from "react-router";
 import Button from "../../components/common/Button";
 import user from "../../assets/user.png";
 import styles from "./Profile.module.css";
-import { COLORS } from "../../utils/theme";
 import getCroppedImg from "./getCroppedImage";
 import { db, auth } from "../../firebase/firebase";
 import ProfilePicture from "./ProfilePicture";
 import { handleAuthStateChange } from "../../api/useFetchMovies";
 import Modal from "../../components/common/Modal/Modal";
-import FavoriteList from "../../components/common/Favorite/FavoriteList"
+import FavoriteList from "../../components/common/Favorite/FavoriteList";
+import WatchList from "../../components/common/WatchList/WatchList";
 
 const actions = {
     setCrop: "SET_CROP",
@@ -61,6 +60,7 @@ export default function Profile() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [isFavoriteListVisible, setIsFavoriteListVisible] = useState(false);
+    const [isWatchlistVisible, setIsWatchlistVisible] = useState(false);
 
     useEffect(() => {
         const fetchProfileImage = (user) => {
@@ -131,6 +131,10 @@ export default function Profile() {
         setIsFavoriteListVisible(!isFavoriteListVisible);
     }
 
+    function toggleWatchlist() {
+        setIsWatchlistVisible(!isWatchlistVisible);
+    }
+
     const uploadCroppedImage = async (
         croppedImageBase64,
         userId,
@@ -188,53 +192,60 @@ export default function Profile() {
 
     return (
         <div className={styles["profile-container"]}>
-            <div className={styles["profile-container__url"]}>
-                <div className={styles["profile-image"]}>
-                    <ProfilePicture
-                        imageUrl={croppedImageUrl || selectedImage || user}
-                        style={{
-                            height: "300px",
-                            width: "350px",
-                            display: "flex",
-                            justifyContent: "center",
-                        }}
-                    />
+            <section
+                className={`${styles.background_section} ${styles.background}`}
+            >
+                <div className={styles["profile-container__url"]}>
+                    <div className={styles["profile-image"]}>
+                        <ProfilePicture
+                            imageUrl={croppedImageUrl || selectedImage || user}
+                            style={{
+                                height: "250px",
+                                width: "250px",
+                            }}
+                        />
+                    </div>
                 </div>
-
-                <input
+                <input className={styles["file-input"]}
                     type="file"
                     accept=".png, .jpg, .jpeg"
                     onChange={handleChange}
                 />
-            </div>
+            </section>
+
             <div className={styles["profile-container__icons"]}>
                 <div>
                     <Button
                         size="sm"
-                        style={{
-                            height: 65,
-                            marginRight: 30,
-                            backgroundColor: COLORS.WHITE,
-                        }}
-                        type="icon"
-                        icon={<BiBookmarkHeart className={styles["icon"]} />}
+                        type="text"
+                        theme="light"
                         onClick={toggleFavoriteList}
-                    ></Button>
+                    >
+                        Favorites
+                    </Button>
                     <Button
                         size="sm"
-                        style={{ height: 65, backgroundColor: COLORS.WHITE }}
-                        type="icon"
-                        icon={<BiPlusCircle className={styles["icon"]} />}
-                    ></Button>
+                        theme="light"
+                        type="text"
+                        onClick={toggleWatchlist}
+                    >
+                        Watchlist
+                    </Button>
                 </div>
             </div>
 
-            {isFavoriteListVisible && (
-                <div className={styles["favorite-list"]}>
-                    <FavoriteList />{" "}
-                </div>
-            )}
-
+            <div className={styles["preferences-container"]}>
+                {isFavoriteListVisible && (
+                    <div className={styles["favorite-list"]}>
+                        <FavoriteList />{" "}
+                    </div>
+                )}
+                {isWatchlistVisible && (
+                    <div className={styles["watch-list"]}>
+                        <WatchList />
+                    </div>
+                )}
+            </div>
             {showModal && (
                 <Modal
                     loading={loading}

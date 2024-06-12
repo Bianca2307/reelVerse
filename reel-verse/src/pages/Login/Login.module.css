@@ -44,8 +44,8 @@
     display: inline !important;
 }
 
-input {
-    margin-top:10px !important;
+.login-form__input input {
+    margin-top:10px;
 }
 
 @media (max-width:320px){

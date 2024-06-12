@@ -28,7 +28,6 @@ section.new_index {
     background-size: cover;
     background-repeat: no-repeat;
     color: var(--white);
-    color: var(--white);
 }
 
 section.new_index.background_8 {
@@ -133,7 +132,7 @@ section.new_index form button {
     border-radius: var(--border-large);
     position: absolute;
     right: 0px;
-    top: 20px;
+    top: 10px;
     color: var(--white);
 }
 
@@ -205,7 +204,7 @@ section.new_index form button:hover {
     }
 
     section.new_index form button {
-        top: 20px;
+        top: 10px;
     }
 }
 
@@ -233,7 +232,7 @@ section.new_index form button:hover {
         height: 35px;
         padding: 0px 15px;
         margin-right: -5px;
-        top: 20px;
+        top: 10px;
     }
 
     div.column_wrapper div.content_wrapper {
@@ -266,7 +265,7 @@ section.new_index form button:hover {
         height: 30px;
         padding: 0px 15px;
         margin-right: -5px;
-        top: 20px;
+        top: 10px;
     }
 
     div.column_wrapper div.content_wrapper {
@@ -290,7 +289,7 @@ section.new_index form button:hover {
     }
 
     .search-movies {
-        width: 50vw;
+        width: 55vw;
     }
 
     .search-movies__input {
@@ -301,8 +300,8 @@ section.new_index form button:hover {
     section.new_index form button {
         height: 30px;
         padding: 0px 15px;
-        margin-right: -31px;
-        top: 20px;
+        margin-right: -12px;
+        top: 10px;
     }
 
     div.column_wrapper div.content_wrapper {

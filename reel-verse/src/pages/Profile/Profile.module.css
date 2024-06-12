@@ -1,22 +1,65 @@
-
-
 .profile-container__icons {
     margin: 10px 0px;
-    display: flex;
-    justify-content: center;
+    margin-top: 130px;
+    padding: 5px 10px;
+
 }
 
-.profile-container__url {
-   align-content: center;
-   text-align: center;
+.profile-container__icons button {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    margin-right: 10px;
+    border-radius: 5px !important;
+    padding: 10px 15px;
+    width: 120px;
+    height: 50px;
+}
+
+section.background_section {
+    min-height: 300px;
+    height: calc(100vh/2.5);
+    max-height: 360px;
+    background-color: rgba(0, 0, 0, .2);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--white);
+}
+
+section.background_section.background {
+    background-image: url(https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter\(duotone,00192f,00baff\)/ctxm191q5o3axFzQsvNPlbKoSYv.jpg);
+    background-image: -webkit-image-set(url(https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter\(duotone,00192f,00baff\)/ctxm191q5o3axFzQsvNPlbKoSYv.jpg) 1x,
+            url(https://media.themoviedb.org/t/p/w3840_and_h1200_multi_faces_filter\(duotone,00192f,00baff\)/ctxm191q5o3axFzQsvNPlbKoSYv.jpg) 2x);
+    background-image: image-set(url(https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter\(duotone,00192f,00baff\)/ctxm191q5o3axFzQsvNPlbKoSYv.jpg) 1x, url(https://media.themoviedb.org/t/p/w3840_and_h1200_multi_faces_filter\(duotone,00192f,00baff\)/ctxm191q5o3axFzQsvNPlbKoSYv.jpg) 2x);
 }
 
 .profile-image {
-    display: flex;
-    justify-content: center;
+    position: relative;
+    z-index: 2;
 }
 
-input {
+.profile-image {
+    top: 100px;
+}
+
+.favorite-list {
+    background: rgba(18, 18, 32, 5);
+    border-radius: 2rem;
+    width: 70%;
+    height:50%;
+    position: relative;
+    margin: 0px 20px;
+}
+
+.watch-list {
+    background: rgba(18, 18, 32, 5);
+    border-radius: 2rem;
+    position: relative;
+    width:70%;
+    height:50%;
+    margin: 0px 20px;
+}
+
+.file-input {
     max-width: 100%;
     margin-top: 30px;
     color: #444;
@@ -24,26 +67,27 @@ input {
     background: #fff;
     border-radius: 10px;
     border: 1px solid rgba(8, 8, 8, 0.288);
+    margin-top: 113px !important;
 }
 
-input::file-selector-button {
+.file-input::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: #457b9d;
-    padding: 10px 20px;
+    background: rgb(13, 181, 218);
+    padding: 5px 20px;
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
     transition: background .2s ease-in-out;
 }
 
-input::file-selector-button:hover {
+.file-input::file-selector-button:hover {
     background: #1d3557;
 }
 
 .modal {
-   width: 100% !important;
-   height: 130px !important;
+    width: 100% !important;
+    height: 130px !important;
 }
 
 .crop-container {
@@ -53,36 +97,17 @@ input::file-selector-button:hover {
     background-color: #333;
 }
 
-.controls button {
-    margin-top:5px;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.controls button:hover {
-    background-color: #0056b3;
-}
-
-.controls {
-    padding: 16px;
+.preferences-container {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.icon {
-    font-size:4rem;
 }
 
 @media (max-width:320px) {
     .css-1pqm26d-MuiAvatar-img {
-        width:0%;
+        width: 0%;
     }
 
     input {
-        width:80%;
-        margin-left:30px;
+        width: 80%;
+        margin-left: 30px;
     }
 }

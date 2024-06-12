@@ -9,6 +9,7 @@ import Protected from "./components/common/Protected";
 import Layout from "./components/common/Layout";
 import Profile from "./pages/Profile/Profile";
 import FavoriteList from "./components/common/Favorite/FavoriteList";
+import WatchList from "./components/common/WatchList/WatchList";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/movies/:id" element={<MovieDetail />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/favorite" element={<FavoriteList />} />
+                        <Route path="/watchlist" element={<WatchList />} />
                     </Route>
                 </Route>
             </Routes>
