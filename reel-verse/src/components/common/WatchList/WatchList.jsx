@@ -1,40 +1,37 @@
-import { useEffect, useState } from "react";
-import { getDocs, query, deleteDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { getDocs, query, deleteDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
-import MovieCard from "../MovieCard/MovieCard";
-import styles from "./Favorite.module.css";
-import Button from "../Button";
-import {
-    getUserCollectionRef,
-    queryCollectionById,
-} from "../../../firebase/firebase";
-import { handleAuthStateChange } from "../../../api/useFetchMovies";
-import Snackbar from "../Snackbar/Snackbar";
+import { getUserCollectionRef, queryCollectionById} from "../../../firebase/firebase";
 import {
     clearSnackbarTimer,
     setSnackbarTimer,
 } from "../Snackbar/snackbarUtils";
+import { handleAuthStateChange } from "../../../api/useFetchMovies";
+import Snackbar from "../Snackbar/Snackbar";
+import MovieCard from "../MovieCard/MovieCard";
+import styles from "./WatchList.module.css";
+import Button from "../Button";
 
-export default function FavoriteList() {
-    const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+export default function WatchList() {
+    const [watchlist, setWatchlist] = useState([]);
     const { t } = useTranslation();
     const [snackbar, setSnackbar] = useState(null);
     const [user, setUser] = useState(null);
 
-    const fetchFavoriteMovies = async (currentUser) => {
+    const fetchWatchlist = async (currentUser) => {
         if (currentUser) {
             try {
-                const favoriteMoviesCollectionRef =
-                    getUserCollectionRef("favoriteMovies")
+                const watchlistCollectionRef = getUserCollectionRef("watchlist");
                 const querySnapshot = await getDocs(
-                    query(favoriteMoviesCollectionRef)
+                    query(watchlistCollectionRef)
                 );
                 const movieDetails = querySnapshot.docs.map((doc) =>
                     doc.data()
                 );
-                setFavoriteMovies(movieDetails);
+                setWatchlist(movieDetails);
             } catch (error) {
                 setSnackbar({
                     message: "Error displaying favorite movies!",
@@ -49,16 +46,16 @@ export default function FavoriteList() {
 
     useEffect(() => {
         return () => clearSnackbarTimer();
-    }, []);
+    },[])
 
     useEffect(() => {
         const unsubscribe = handleAuthStateChange(async (currentUser) => {
             setUser(currentUser);
-            await fetchFavoriteMovies(currentUser);
+            await fetchWatchlist(currentUser);
         });
         return () => unsubscribe();
-    }, []);
-
+    }, [])
+    
     const deleteMovie = async (id) => {
         if (!user) {
             setSnackbar({
@@ -71,9 +68,9 @@ export default function FavoriteList() {
         }
 
         try {
-            const favoriteMoviesCollectionRef =
-                getUserCollectionRef("favoriteMovies");
-            const querySnapshot = await queryCollectionById(favoriteMoviesCollectionRef, id);
+            const watchlistCollectionRef = getUserCollectionRef("watchlist")
+            const querySnapshot = await queryCollectionById(watchlistCollectionRef, id)
+
             for (const doc of querySnapshot.docs) {
                 await deleteDoc(doc.ref);
                 setSnackbar({
@@ -82,23 +79,24 @@ export default function FavoriteList() {
                 });
                 setSnackbarTimer(() => setSnackbar(null), 3000);
             }
-            fetchFavoriteMovies(user);
+            fetchWatchlist(user);
         } catch (error) {
-            setSnackbar({ message: "Error deleting movie!", status: "error" });
-            setSnackbarTimer(() => setSnackbar(null), 3000);
+             setSnackbar({ message: "Error deleting movie!", status: "error" });
+             setSnackbarTimer(() => setSnackbar(null), 3000);
         }
-    };
+    }
+
     return (
         <>
             {snackbar && (
                 <Snackbar message={snackbar.message} status={snackbar.status} />
             )}
-            <div className={styles["favorite-container"]}>
-                <h2 className={styles["favorite-container__title"]}>
-                    {t("FAVORITE.TITLE")}
+            <div className={styles["watchlist-container"]}>
+                <h2 className={styles["watchlist-container__title"]}>
+                    {t("WATCHLIST.TITLE")}
                 </h2>
-                <div className={styles["favorite-list-container"]}>
-                    {favoriteMovies.map((movie) => (
+                <div className={styles["watchlist-list-container"]}>
+                    {watchlist.map((movie) => (
                         <div key={movie.id}>
                             <Link to={`/movies/${movie.movieId}`}>
                                 <MovieCard

@@ -41,17 +41,16 @@ export const createUserDocument = async (user) => {
     }
 }
 
-export const getUserFavoriteMoviesCollectionRef = () => {
+export const getUserCollectionRef = (collectionName) => {
     const user = auth.currentUser;
     const userId = user.uid;
     const userRef = doc(db, "users", userId);
-    return collection(userRef, "favoriteMovies");
+    return collection(userRef, collectionName)
+}
 
-};
-
-export const queryFavoriteMoviesById = async (favoriteMoviesCollectionRef, movieId) => {
-    const q = query(favoriteMoviesCollectionRef, where("movieId", "==", movieId));
+export const queryCollectionById = async (collectionRef, movieId) => {
+    const q = query(collectionRef, where("movieId", "==", movieId));
     return await getDocs(q);
-};
+}
 
 export default app;

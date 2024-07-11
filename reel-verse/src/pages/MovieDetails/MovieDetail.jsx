@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { deleteDoc, addDoc } from "firebase/firestore";
 import Spinner from "react-bootstrap/Spinner";
 
@@ -14,13 +15,12 @@ import {
 } from "../../utils/constants";
 import Button from "../../components/common/Button";
 import {
-    getUserFavoriteMoviesCollectionRef,
-    queryFavoriteMoviesById,
+    getUserCollectionRef,
+    queryCollectionById
 } from "../../firebase/firebase";
 import { handleAuthStateChange } from "../../api/useFetchMovies";
 import Snackbar from "../../components/common/Snackbar/Snackbar";
 import { setSnackbarTimer } from "../../components/common/Snackbar/snackbarUtils";
-
 
 export default function MovieDetail() {
     const params = useParams();
@@ -28,6 +28,7 @@ export default function MovieDetail() {
     const [videoKey, setVideoKey] = useState("");
     const [recommendations, setRecommendations] = useState([]);
     const [isAddToFavorite, setIsAddToFavorite] = useState(false);
+    const [isAddToWatchlist, setIsAddToWatchlist] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [snackbar, setSnackbar] = useState(null);
 
@@ -60,12 +61,8 @@ export default function MovieDetail() {
         const fetchFavoriteMovies = async (user) => {
             if (user) {
                 try {
-                    const favoriteMoviesCollectionRef =
-                        getUserFavoriteMoviesCollectionRef();
-                    const querySnapshot = await queryFavoriteMoviesById(
-                        favoriteMoviesCollectionRef,
-                        params.id
-                    );
+                    const favoriteMoviesCollectionRef = getUserCollectionRef("favoriteMovies");
+                    const querySnapshot = await queryCollectionById(favoriteMoviesCollectionRef, params.id);
                     const isFavorite = !querySnapshot.empty;
                     setIsAddToFavorite(isFavorite);
                 } catch (error) {
@@ -76,9 +73,26 @@ export default function MovieDetail() {
             }
         };
 
+        const fetchWatchlist = async (user) => {
+            if (user) {
+                try {
+                    const watchlistCollectionRef = getUserCollectionRef("watchlist")
+                    const querySnapshot = await queryCollectionById(watchlistCollectionRef, params.id);
+                    const watchlist = !querySnapshot.empty;
+                    setIsAddToWatchlist(watchlist);
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                console.log("User not logged in ");
+            }
+        };
+
         const unsubscribe = handleAuthStateChange(async (user) => {
             await fetchFavoriteMovies(user);
+            await fetchWatchlist(user);
             await fetchMoviesDetails(user);
+
         });
         return () => unsubscribe();
     }, [params.id]);
@@ -91,12 +105,8 @@ export default function MovieDetail() {
         setIsProcessing(true);
         if (isProcessing) return;
         try {
-            const favoriteMoviesCollectionRef =
-                getUserFavoriteMoviesCollectionRef();
-            const querySnapshot = await queryFavoriteMoviesById(
-                favoriteMoviesCollectionRef,
-                params.id
-            );
+            const favoriteMoviesCollectionRef = getUserCollectionRef("favoriteMovies")
+            const querySnapshot = await queryCollectionById(favoriteMoviesCollectionRef, params.id);
 
             if (isAddToFavorite) {
                 for (const doc of querySnapshot.docs) {
@@ -114,8 +124,7 @@ export default function MovieDetail() {
                     poster_path: movieDetail.poster_path,
                     release_date: movieDetail.release_date,
                     vote_average: movieDetail.vote_average,
-                    videoKey: videoKey,
-                    state: true,
+                    videoKey: videoKey
                 });
                 setSnackbar({
                     message: "Movie added to favorites successfully!",
@@ -127,7 +136,55 @@ export default function MovieDetail() {
                 (previousAddToFavorite) => !previousAddToFavorite
             );
         } catch (error) {
-            setSnackbar({ message: "Error updating favorite movie", status: "error" });
+            setSnackbar({
+                message: "Error updating favorite movie",
+                status: "error",
+            });
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    const handleAddToWatchList = async () => {
+        setIsProcessing(true);
+        if (isProcessing) return;
+        try {
+            const watchlistCollectionRef = getUserCollectionRef("watchlist");
+            const querySnapshot = await queryCollectionById(watchlistCollectionRef, params.id);
+
+            if (isAddToWatchlist) {
+                for (const doc of querySnapshot.docs) {
+                    await deleteDoc(doc.ref);
+                    setSnackbar({
+                        message: "Movie deleted from watchlist!",
+                        status: "removed",
+                    });
+                }
+            } else {
+                addDoc(watchlistCollectionRef, {
+                    movieId: params.id,
+                    title: movieDetail.title,
+                    overview: movieDetail.overview,
+                    poster_path: movieDetail.poster_path,
+                    release_date: movieDetail.release_date,
+                    vote_average: movieDetail.vote_average,
+                    videoKey: videoKey
+                });
+                setSnackbar({
+                    message: "Movie added to watchlist successfully!",
+                    status: "success",
+                });
+            }
+
+            setSnackbarTimer(() => setSnackbar(null), 3000);
+            setIsAddToWatchlist(
+                (prevIsAddToWatchlist) => !prevIsAddToWatchlist
+            );
+        } catch (error) {
+            setSnackbar({
+                message: "Error updating watchlist",
+                status: "error",
+            });
         } finally {
             setIsProcessing(false);
         }
@@ -163,19 +220,34 @@ export default function MovieDetail() {
                                     </span>
                                 </Spinner>
                             ) : (
-                                <Button
-                                    type="icon"
-                                    disabled={isProcessing}
-                                    icon={
-                                        isAddToFavorite ? (
-                                            <MdOutlineFavorite />
-                                        ) : (
-                                            <MdFavoriteBorder />
-                                        )
-                                    }
-                                    className={styles["favorite-icon"]}
-                                    onClick={handleAddToFavorite}
-                                />
+                                <div>
+                                    <Button
+                                        type="icon"
+                                        disabled={isProcessing}
+                                        icon={
+                                            isAddToFavorite ? (
+                                                <MdOutlineFavorite />
+                                            ) : (
+                                                <MdFavoriteBorder />
+                                            )
+                                        }
+                                        className={styles["favorite-icon"]}
+                                        onClick={handleAddToFavorite}
+                                    />
+                                    <Button
+                                        type="icon"
+                                        disabled={isProcessing}
+                                        icon={
+                                            isAddToWatchlist ? (
+                                                <FaBookmark />
+                                            ) : (
+                                                <FaRegBookmark />
+                                            )
+                                        }
+                                        className={styles["favorite-icon"]}
+                                        onClick={handleAddToWatchList}
+                                    />
+                                </div>
                             )}
                         </div>
                     </div>
@@ -188,20 +260,14 @@ export default function MovieDetail() {
                             />
                         </div>
                         <div className={styles["details-grid"]}>
-                            <div
-                                className={
-                                    styles["overview"]
-                                }
-                            >
+                            <div className={styles["overview"]}>
                                 {movieDetail && (
                                     <p className={styles["label"]}>
                                         {movieDetail.overview}
                                     </p>
                                 )}
                             </div>
-                            <div
-                                className={styles["rating"]}
-                            >
+                            <div className={styles["rating"]}>
                                 <i className={styles["mh-icon"]}>
                                     <svg
                                         width="24"
@@ -233,7 +299,9 @@ export default function MovieDetail() {
                     <Container className={styles["recommended-container"]}>
                         <Row>
                             {recommendations &&
-                                recommendations.slice(0, 5).map((movie) => (
+                                recommendations
+                                    .slice(0, 5)
+                                    .map((movie) => (
                                         <img
                                             src={`${BASE_IMAGE_URL}${movie.poster_path}`}
                                             key={movie.id}
@@ -243,7 +311,7 @@ export default function MovieDetail() {
                                                 ]
                                             }
                                         />
-                                ))}
+                                    ))}
                         </Row>
                     </Container>
                 </div>

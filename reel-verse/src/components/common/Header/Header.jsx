@@ -21,7 +21,7 @@ export default function Header() {
         navigate("/");
     }
 
-    function toggleMenu() {
+    function handleToggleMenu() {
         setIsOpen(!isOpen);
     }
 
@@ -31,16 +31,20 @@ export default function Header() {
                 <img src={logo} alt="logo" className={styles["logo"]} />
                 <h3>{t("HEADER.TITLE")}</h3>
             </Link>
-            <div className={styles["hamburger"]} onClick={toggleMenu}>
+            <div className={styles["hamburger"]} onClick={handleToggleMenu}>
                 {isOpen ? <FaTimes /> : <FaBars />}
             </div>
-            <nav className={`${styles["navbar--links"]} ${isOpen ? styles["open"] : ""}`}>
+            <nav
+                className={`${styles["navbar--links"]} ${
+                    isOpen ? styles["open"] : ""
+                }`}
+            >
                 <NavLink
                     to="/movies"
                     className={({ isActive }) =>
                         isActive ? styles["active-link"] : null
                     }
-                    onClick={toggleMenu}
+                    onClick={handleToggleMenu}
                 >
                     {t("HEADER.MOVIES")}
                 </NavLink>
@@ -49,9 +53,18 @@ export default function Header() {
                     className={({ isActive }) =>
                         isActive ? styles["active-link"] : null
                     }
-                    onClick={toggleMenu}
+                    onClick={handleToggleMenu}
                 >
                     {t("HEADER.FAVORITES")}
+                </NavLink>
+                <NavLink
+                    to="/watchlist"
+                    className={({ isActive }) =>
+                        isActive ? styles["active-link"] : null
+                    }
+                    onClick={handleToggleMenu}
+                >
+                    {t("HEADER.WATCHLIST")}
                 </NavLink>
                 <NavLink
                     to="/"
@@ -60,7 +73,7 @@ export default function Header() {
                     }
                     onClick={() => {
                         handleLogout();
-                        toggleMenu();
+                        handleToggleMenu();
                     }}
                 >
                     {t("HEADER.LOG_OUT")}

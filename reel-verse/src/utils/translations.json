@@ -32,7 +32,8 @@
         "MOVIES": "Movies",
         "LOG_OUT": "Log out",
         "TITLE":"reelVerse",
-        "FAVORITES":"Favorites"
+        "FAVORITES":"Favorites",
+        "WATCHLIST":"WatchList"
     },
 
     "REGISTER": {
@@ -56,5 +57,8 @@
     },
     "FAVORITE": {
         "TITLE":"FAVORITE MOVIES"
+    },
+    "WATCHLIST":{
+        "TITLE":"WATCHLIST"
     }
 }
