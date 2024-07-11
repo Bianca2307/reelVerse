@@ -1,5 +1,10 @@
 
 ReelVerse is a React app built with Vite, utilizing Firebase Firestore for data storage.The app uses The Movie Database (TMDB) API to display movies and TV shows.
+
+
+
+
+
 Features: 
         - Display popular movies, top-rated movie, and more.
         - Allows for movie searching by keyword
@@ -12,6 +17,11 @@ Features:
         - Uses loading spinners for seamless user experience
         - Responsiveness
 
+
+
+
+
+
 Technology Stack:
          - React
          - Vite
@@ -21,3 +31,7 @@ Technology Stack:
 Screenshoots:
 
 ![Screenshot 2024-07-11 222115](https://github.com/user-attachments/assets/03527dde-30e1-4fcd-9778-879a12acc452) ![Screenshot 2024-07-11 223100](https://github.com/user-attachments/assets/e3b1016d-24c7-4679-9e5b-6e1b135268a9)
+![Screenshot 2024-07-11 223140](https://github.com/user-attachments/assets/ccf39825-5227-4e21-88d7-156238c94b1c)
+
+![Screenshot 2024-07-11 223208](https://github.com/user-attachments/assets/2064b8c8-f06d-4f5d-985c-86621ff0aec4)
+![Screenshot 2024-07-11 223245](https://github.com/user-attachments/assets/6f5f3075-c121-4f9b-8d58-ee4b482f2673)
