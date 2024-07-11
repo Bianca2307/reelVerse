@@ -8,25 +8,16 @@ ReelVerse is a React app built with Vite, utilizing Firebase Firestore for data 
 Features: 
         - Display popular movies, top-rated movie, and more.
 
-
-        
         - Allows for movie searching by keyword
 
-
-        
         - Real-time search results
-
-
         
         - Filters movies and TV shows by genres, popularity, upcoming, now playing and top-rated
 
-        
         - Generates similar movies or TV shows for every movie or TV show
 
-        
         - Shows movie and TV show information, such as ratings, overviews, release dates.
 
-        
         - Allows users to add movies or TV shows to their favorites or watchlist.
 
         
