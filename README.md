@@ -1,5 +1,23 @@
-![Screenshot 2024-04-08 195204](https://github.com/Bianca2307/reelVerse/assets/97783376/f3c329a3-69d6-41d3-88af-9986a6a81b66)
-![Screenshot 2024-04-08 195217](https://github.com/Bianca2307/reelVerse/assets/97783376/8ba60a99-d800-4204-81d7-47c16e59ab16)
-![Screenshot 2024-04-08 195228](https://github.com/Bianca2307/reelVerse/assets/97783376/3505b241-563a-4f33-9e36-519969ed7706)
-![Screenshot 2024-04-08 195246](https://github.com/Bianca2307/reelVerse/assets/97783376/0365f911-ac71-4afb-b260-3e45835a0281)
-![Screenshot 2024-04-08 195301](https://github.com/Bianca2307/reelVerse/assets/97783376/e040b032-78cc-41d6-a61e-0a1632825b54)
+
+ReelVerse is a React app built with Vite, utilizing Firebase Firestore for data storage.The app uses The Movie Database (TMDB) API to display movies and TV shows.
+Features: 
+        - Display popular movies, top-rated movie, and more.
+        - Allows for movie searching by keyword
+        - Real-time search results
+        - Filters movies and TV shows by genres, popularity, upcoming, now playing and top-rated
+        - Generates similar movies or TV shows for every movie or TV show
+        - Shows movie and TV show information, such as ratings, overviews, release dates.
+        - Allows users to add movies or TV shows to their favorites or watchlist.
+        - Allows users to upload an image profile for their account 
+        - Uses loading spinners for seamless user experience
+        - Responsiveness
+
+Technology Stack:
+         - React
+         - Vite
+         - Firebase Firestore
+         - The Movie Database (TMDB) API
+
+Screenshoots:
+
+![Screenshot 2024-07-11 222115](https://github.com/user-attachments/assets/03527dde-30e1-4fcd-9778-879a12acc452) ![Screenshot 2024-07-11 223100](https://github.com/user-attachments/assets/e3b1016d-24c7-4679-9e5b-6e1b135268a9)
