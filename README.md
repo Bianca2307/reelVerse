@@ -20,13 +20,10 @@ Features:
 
         - Allows users to add movies or TV shows to their favorites or watchlist.
 
-        
         - Allows users to upload an image profile for their account 
 
-        
         - Uses loading spinners for seamless user experience
 
-        
         - Responsiveness
 
 
@@ -35,17 +32,12 @@ Features:
 
 
 Technology Stack:
-
-
          - React
-
          
          - Vite
-
          
          - Firebase Firestore
 
-         
          - The Movie Database (TMDB) API
 
          
